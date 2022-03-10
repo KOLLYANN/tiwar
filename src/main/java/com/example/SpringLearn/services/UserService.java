@@ -3,7 +3,7 @@ package com.example.SpringLearn.services;
 import com.example.SpringLearn.models.Role;
 import com.example.SpringLearn.models.User;
 import com.example.SpringLearn.repositories.UserRepo;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,9 +12,6 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
@@ -22,8 +19,11 @@ public class UserService implements UserDetailsService {
     final
     UserRepo userRepo;
 
-    public UserService(UserRepo userRepo) {
+    final PasswordEncoder passwordEncoder;
+
+    public UserService(UserRepo userRepo, @Lazy PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public boolean checkUsername(String name) {
@@ -38,7 +38,7 @@ public class UserService implements UserDetailsService {
     public void addUser(String name, String pass) {
         User user = new User();
         user.setUsername(name);
-        user.setPassword(pass);
+        user.setPassword(passwordEncoder.encode(pass));
         user.setActive(true);
         user.setRoles(Collections.singletonList(Role.USER));
         userRepo.save(user);
