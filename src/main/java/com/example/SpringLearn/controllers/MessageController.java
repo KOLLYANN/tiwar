@@ -17,8 +17,12 @@ import java.util.List;
 @RequestMapping("/message")
 public class MessageController {
 
-    @Autowired
+    final
     MessageServices messageServices;
+
+    public MessageController(MessageServices messageServices) {
+        this.messageServices = messageServices;
+    }
 
     @GetMapping
     public String index(

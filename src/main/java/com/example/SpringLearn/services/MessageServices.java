@@ -12,8 +12,12 @@ import java.util.stream.Collectors;
 @Service
 public class MessageServices {
 
-    @Autowired
+    final
     MessageRepo messageRepo;
+
+    public MessageServices(MessageRepo messageRepo) {
+        this.messageRepo = messageRepo;
+    }
 
     public List<Message> messageList() {
         return messageRepo.findAll();

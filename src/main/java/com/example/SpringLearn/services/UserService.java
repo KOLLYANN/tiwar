@@ -12,18 +12,27 @@ import org.springframework.stereotype.Service;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 @Service
 public class UserService implements UserDetailsService {
 
-    @Autowired
+    final
     UserRepo userRepo;
 
+    public UserService(UserRepo userRepo) {
+        this.userRepo = userRepo;
+    }
 
+    public boolean checkUsername(String name) {
+        return userRepo.findAll().stream().anyMatch(user -> user.getUsername().equals(name));
+    }
 
     public User findUser(String name) {
         return userRepo.findAll().stream().filter(user -> user.getUsername().equals(name)).findFirst().orElseThrow();
+
     }
 
     public void addUser(String name, String pass) {

@@ -13,8 +13,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 @RequestMapping("/registration")
 public class RegController {
 
-    @Autowired
+    final
     UserService userService;
+
+    public RegController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping
     public String reg() {
@@ -23,7 +27,7 @@ public class RegController {
 
     @PostMapping
     public String addUser(@RequestParam String username, @RequestParam String password, Model model) {
-        if(userService.findUser(username) != null) {
+        if(!userService.checkUsername(username)) {
             userService.addUser(username, password);
             return "redirect:/login";
         }

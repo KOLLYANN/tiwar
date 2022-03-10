@@ -19,8 +19,12 @@ import javax.sql.DataSource;
 @EnableWebSecurity
 public class WebSecurity extends WebSecurityConfigurerAdapter {
 
-    @Autowired
+    final
     UserService userService;
+
+    public WebSecurity(UserService userService) {
+        this.userService = userService;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
