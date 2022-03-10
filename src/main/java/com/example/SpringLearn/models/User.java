@@ -1,0 +1,63 @@
+package com.example.SpringLearn.models;
+
+import lombok.Data;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+
+import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
+
+@Entity
+@Data
+@Table(name = "usr")
+public class User implements UserDetails {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    long id;
+
+    String username;
+    String password;
+    boolean active;
+
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "usr_role", joinColumns = @JoinColumn(name = "id_user"))
+    @Enumerated(EnumType.STRING)
+    List<Role> roles;
+
+    public User() {
+    }
+
+    public User(String username, String password, boolean active, List<Role> roles) {
+        this.username = username;
+        this.password = password;
+        this.active = active;
+        this.roles = roles;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return roles;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return active;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return active;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return active;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return isActive();
+    }
+}
