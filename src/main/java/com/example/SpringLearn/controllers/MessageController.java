@@ -27,10 +27,15 @@ public class MessageController {
     @GetMapping
     public String index(
             @AuthenticationPrincipal User user,
-            Model model) {
+            Model model,
+            RedirectAttributes red
+
+        ) {
         List<Message> messageList = messageServices.messageList();
         model.addAttribute("messages", messageList);
         model.addAttribute("name", user.getUsername());
+        int count = messageServices.messageList().size();
+        model.addAttribute("count", count);
         return "message";
     }
 
@@ -38,20 +43,27 @@ public class MessageController {
     public String add(
             @AuthenticationPrincipal User user,
             @RequestParam String text,
-            @RequestParam String tag) {
-        messageServices.addMessage(text, tag, user);
+            @RequestParam(required = false) String tag) {
+        messageServices.addMessage(text, "смс", user);
         return "redirect:/message";
     }
 
     @PostMapping("/filter")
-    public String filter(@RequestParam String filter, Model model, RedirectAttributes redirectAttributes) {
+    public String filter(@RequestParam String filter,
+                         Model model,
+                         @AuthenticationPrincipal User user
+                         ) {
         List<Message> messages;
         if (!filter.isEmpty()) {
             messages = messageServices.filterMessage(filter);
         } else {
             messages = messageServices.messageList();
         }
+        int count = messageServices.messageList().size();
         model.addAttribute("messages", messages);
+        model.addAttribute("filter", filter);
+        model.addAttribute("name", user.getUsername());
+        model.addAttribute("count", count);
         return "message";
     }
 
