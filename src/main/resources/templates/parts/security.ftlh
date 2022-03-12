@@ -8,6 +8,8 @@ know = Session.SPRING_SECURITY_CONTEXT??
     isAdmin = user.isAdmin()
     id = user.getId()
     isLoggedIn = true
+    aDateTime = .now
+    aTime = aDateTime?time
     >
 <#else>
     <#assign

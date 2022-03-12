@@ -1,4 +1,97 @@
-body {
+.container {
+    text-decoration: none;
+    background-color: #333;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: white;
+}
+
+.line {
+    border-top: #3e3d36 solid 2px;
+}
+
+hr {
+   border-top: 1px solid white;
+}
+
+p, strong {
+    color: white;
+}
+.link a {
+    display: block;
+    padding: 5px;
+}
+
+li {
+    display: list-item;
+}
+
+img .user { width: 200px; height: 200px; object-fit: contain; }
+
+img {
+ ;
+}
+
+.us {
+    padding-left: 50px;
+}
+
+footer {
+    padding-top: 500px;
+
+}
+
+a {
+    text-decoration: none;
+}
+
+.dgreen {
+    color: #9C9;
+}
+.dred {
+    color: #dd4b39;
+}
+
+.profile table {
+    font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+    font-size: 14px;
+    border-radius: 10px;
+    border-spacing: 0;
     text-align: center;
-    background-color: #76b5ec;
+    padding: 50px;
+}
+.profile th {
+    background: #BCEBDD;
+    color: white;
+    text-shadow: 0 1px 1px #2D2020;
+    padding: 10px 20px;
+}
+.profile th, td {
+    border-style: solid;
+    border-width: 0 1px 1px 0;
+    border-color: white;
+}
+.profile th:first-child, td:first-child {
+    text-align: left;
+}
+.profile th:first-child {
+    border-top-left-radius: 10px;
+}
+th:last-child {
+    border-top-right-radius: 10px;
+    border-right: none;
+}
+.profile td {
+    padding: 10px 20px;
+    background: #F8E391;
+}
+.profile tr:last-child td:first-child {
+    border-radius: 0 0 0 10px;
+}
+.profile tr:last-child td:last-child {
+    border-radius: 0 0 10px 0;
+}
+.profile tr td:last-child {
+    border-right: none;
 }
