@@ -1,4 +1,4 @@
-package com.example.SpringLearn.security;
+package com.example.SpringLearn.config;
 
 import com.example.SpringLearn.services.UserService;
 import org.springframework.context.annotation.Bean;
@@ -31,11 +31,13 @@ public class WebSecurity extends WebSecurityConfigurerAdapter {
                     .antMatchers("/static/**").permitAll()
                     .anyRequest().authenticated()
                 .and()
-                    .formLogin()
-                    .permitAll()
-                    .loginPage("/login")
+                .formLogin()
+                .loginPage("/login")
+                .permitAll()
                 .and()
                     .logout()
+                    .invalidateHttpSession(true)
+                    .logoutSuccessUrl("/login")
                     .permitAll();
     }
 

@@ -1,6 +1,8 @@
 package com.example.SpringLearn.models;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -8,9 +10,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import javax.persistence.*;
 import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "usr")
 public class User implements UserDetails {
     @Id
@@ -20,6 +25,11 @@ public class User implements UserDetails {
     String username;
     String password;
     boolean active;
+    String email;
+    String activateMailCode;
+    @Column(name = "active_code")
+    boolean activeCode;
+    int count;
 
     public boolean isAdmin() {
         return roles.contains(Role.ADMIN);
@@ -28,10 +38,7 @@ public class User implements UserDetails {
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "usr_role", joinColumns = @JoinColumn(name = "id_user"))
     @Enumerated(EnumType.STRING)
-    List<Role> roles;
-
-    public User() {
-    }
+    Set<Role> roles;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

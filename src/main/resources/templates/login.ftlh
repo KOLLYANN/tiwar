@@ -2,15 +2,15 @@
 <@c.page>
 <form action="/login" method="post">
         <div class="form-group row">
-            <label for="inputEmail3" class="col-sm-1 col-form-label">Username</label>
+            <label for="inputEmail3" class="col-sm-1 col-form-label">Email</label>
             <div class="col-sm-3">
-                <input type="text" class="form-control" name="username" id="inputEmail3" placeholder="Name">
+                <input type="email" class="form-control" name="username" id="inputEmail3" placeholder="Email" required>
             </div>
         </div>
         <div class="form-group row">
             <label for="inputPassword3" class="col-sm-1 col-form-label">Password</label>
             <div class="col-sm-3">
-                <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password">
+                <input type="password" name="password" class="form-control" id="inputPassword3" placeholder="Password" required>
             </div>
         </div>
     <input type="hidden" name="_csrf" value="${_csrf.token}"/>

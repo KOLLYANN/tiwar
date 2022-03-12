@@ -26,9 +26,9 @@ public class RegController {
     }
 
     @PostMapping
-    public String addUser(@RequestParam String username, @RequestParam String password, Model model) {
-        if(!userService.checkUsername(username)) {
-            userService.addUser(username, password);
+    public String addUser(@RequestParam String email, @RequestParam String username, @RequestParam String password, Model model) {
+        if(!userService.checkUsername(email)) {
+            userService.addUser(email,username, password);
             return "redirect:/login";
         }
         model.addAttribute("userExists","Пользователь существует");

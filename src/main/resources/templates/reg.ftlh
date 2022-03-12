@@ -1,6 +1,8 @@
 <#import "parts/comp.ftlh" as c>
 <@c.page>
 <form action="/registration" method="post">
+    <label><b>Email</b></label>
+    <input type="email" placeholder="Enter email" name="email" required>
     <label><b>Username</b></label>
     <input type="text" placeholder="Enter Username" name="username" required>
     <label><b>Password</b></label>
