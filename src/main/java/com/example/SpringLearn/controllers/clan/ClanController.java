@@ -89,6 +89,22 @@ public class ClanController {
         return "clan/clanPage";
     }
 
+    @GetMapping("/medals/{id}")
+    public String getMedals(
+            @PathVariable("id") Long id,
+            @AuthenticationPrincipal User user,
+            Model model
+    ) {
+        User userById = userService.findUserById(user.getId());
+        Clan clan = clanService.findClanById(id).get();
+
+        model.addAttribute("us", userById);
+        model.addAttribute("clan", clan);
+        model.addAttribute("exp", userService.expBar(userService.findUserByIdt(user.getId()).get()));
+
+        return "clan/clanMedals";
+    }
+
 
     @PostMapping("/create")
     public String clanCreate(
@@ -97,7 +113,8 @@ public class ClanController {
     ) {
         Optional<User> userByIdt = userService.findUserByIdt(authUser.getId());
         if(userByIdt.get().getClan() == null) {
-            Clan clan = new Clan(title, 0L,360L,1L ,List.of(authUser), userByIdt.get().getId());
+            Clan clan = new Clan(title, 0L,0L,0L,0L,0L,
+                    0L,360L,1L ,List.of(authUser), userByIdt.get().getId());
             Clan clan1 = clanService.saveClan(clan);
             userByIdt.get().setClan(clan1);
             //add exp in clan
@@ -113,8 +130,17 @@ public class ClanController {
             @RequestParam("id") Long id
     ) {
         Optional<Clan> clanById = clanService.findClanById(id);
+        List<User> users = clanById.get().getUsers();
         User userById = userService.findUserById(user.getId());
+
+        for(User us : users) {
+            if(us.getIdBossAttack() != null) {
+                userById.setIdBossAttack(us.getIdBossAttack());
+                userById.setBossDamage(0L);
+            }
+        }
         userById.setClan(clanById.get());
+
 
         userService.saveUser(userById);
 
@@ -129,6 +155,7 @@ public class ClanController {
         Long id = userById.getClan().getId();
         if(!Objects.equals(userById.getId(), userById.getClan().getOwnerId())) {
             userById.setClan(null);
+            userById.setBossDamage(null);
             userById.setExpForClan(0L);
             userService.saveUser(userById);
         } else {
@@ -139,6 +166,8 @@ public class ClanController {
 
             for (User us : userList) {
                 us.setClan(null);
+                us.setIdBossAttack(null);
+                us.setBossDamage(null);
                 us.setExpForClan(0L);
                 userService.saveUser(us);
             }

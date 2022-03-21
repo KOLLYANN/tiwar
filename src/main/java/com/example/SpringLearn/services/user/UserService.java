@@ -53,6 +53,14 @@ public class UserService implements UserDetailsService {
         userRepo.plusUserManaByTrain(id);
     }
 
+    public void bossDamage(Long bossDamage, Long userId) {
+        userRepo.bossDamage(bossDamage, userId);
+    }
+
+    public void updateBossDamage(Long bossDamage, Long userId) {
+        userRepo.updateBossDamage(0L, userId);
+    }
+
 
     public void minusUserManaAndHealthByVictory(Long id) {
         userRepo.minusManaUserVictory(id);
@@ -110,6 +118,10 @@ public class UserService implements UserDetailsService {
         if (user.getClan() != null) {
             userRepo.updateExpClan(user.getClan().getId(), expAddForClan);
         }
+    }
+
+    public void updateExpAndSilverUserAtCave(Long exp, Long silver, Long userId) {
+        userRepo.updateExpAndSilverUserAtCave(exp, silver, userId);
     }
 
     public boolean checkUsername(String name) {

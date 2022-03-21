@@ -10,6 +10,8 @@
         <div class="progress" style="width:${exp}%"></div>
     </div>
 
+    <div class="block_zero center blue">Великие сражения титанов!<br></div>
+    <div class="line"></div>
     <div class="menuList">
         <#if us.getIdBossAttack()??>
         <li><a href="/boss/${us.getIdBossAttack()!"1"}"><img src="/img/cave/1.jpg" alt="">Дядя ваня <span class="white"></span></a>
@@ -19,8 +21,9 @@
                 </li>
         </#if>
         <li><a href="/boss/2"><img src="/img/cave/2.jpg" alt="">Топор <span class="white"></span></a></li>
-        <li><a href="/#/"><img src="/img/cave/4.jpg" alt="">Монгол</a></li>
-        <li><a href="/#/"><img src="/img/cave/3.jpg" alt="">Авторитет</a></li>
+        <li><a href="/boss/3"><img src="/img/cave/4.jpg" alt="">Монгол</a></li>
+        <li><a href="/boss/4"><img src="/img/cave/3.jpg" alt="">Авторитет</a></li>
+        <li><a href="/boss/5"><img src="/img/cave/5.jpg" alt="">Поль</a></li>
     </div>
 
 

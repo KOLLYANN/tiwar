@@ -16,6 +16,4 @@ public interface BossRepo extends JpaRepository<Boss, Long> {
     @Query("update Boss b set b.health = b.health - :minusHealth where b.id = :id")
     void bossOneMinusHealth(@Param("minusHealth") Long minusHealth, @Param("id") Long id);
 
-
-
 }

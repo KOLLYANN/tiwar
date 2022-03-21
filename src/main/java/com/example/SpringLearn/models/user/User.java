@@ -45,6 +45,7 @@ public class User implements UserDetails {
     Long skillMaxPower;
 
     Long idBossAttack;
+    Long bossDamage;
 
 
     Long health;

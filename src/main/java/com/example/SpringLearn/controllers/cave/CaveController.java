@@ -41,9 +41,14 @@ public class CaveController {
             }
         }
 
+        if(userService.expBar(userById) == 100) {
+            model.addAttribute("newLevel", 1);
+        }
+        userService.updateLevelUser(userById);
 
         model.addAttribute("us", userById);
         model.addAttribute("exp", userService.expBar(userById));
+        model.addAttribute("newLevel", 1);
 
         return "cave/cave";
     }

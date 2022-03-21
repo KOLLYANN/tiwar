@@ -24,7 +24,7 @@ public interface UserRepo extends JpaRepository<User, Long> {
 
     @Modifying
     @Transactional
-    @Query("update User u set u.idBossAttack = null where u.id = :id")
+    @Query("update User u set u.idBossAttack = null, u.bossDamage = null where u.id = :id")
     void updateToNullBossAttack(@Param("id") long id);
 
     @Modifying
@@ -32,11 +32,26 @@ public interface UserRepo extends JpaRepository<User, Long> {
     @Query("update User u set u.idBossAttack = :idBoss where u.id = :id")
     void updateBossAttack(@Param("idBoss")Long idBoss,@Param("id") long id);
 
+    @Modifying
+    @Transactional
+    @Query("update User u set u.bossDamage = :bossDamage where u.id = :id")
+    void updateBossDamage(@Param("bossDamage")Long bossDamage,@Param("id") long id);
 
     @Modifying
     @Transactional
-    @Query("update User u set u.exp = u.exp + :exp,u.expForClan = u.expForClan + :expForClan, u.silver = u.silver + :gold where u.id = :id")
-    void updateExpUser(@Param("exp") long exp,@Param("expForClan") Long expForClan,@Param("gold") long gold ,@Param("id") long id);
+    @Query("update User u set u.bossDamage = u.bossDamage + :bossDamage where u.id = :id")
+    void bossDamage(@Param("bossDamage")Long v,@Param("id") long id);
+
+    @Modifying
+    @Transactional
+    @Query("update User u set u.exp = u.exp + :exp,u.expForClan = u.expForClan + :expForClan, u.silver = u.silver + :silver where u.id = :id")
+    void updateExpUser(@Param("exp") long exp,@Param("expForClan") Long expForClan,@Param("silver") long silver ,@Param("id") long id);
+
+    @Modifying
+    @Transactional
+    @Query("update User u set u.exp = u.exp + :exp,u.silver = u.silver + :silver where u.id = :id")
+    void updateExpAndSilverUserAtCave(@Param("exp") long exp,@Param("silver") long silver ,@Param("id") long id);
+
 
     @Modifying
     @Transactional

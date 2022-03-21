@@ -36,6 +36,24 @@ public class ClanService {
         return clanRepo.findAll();
     }
 
+    public void addCountB1forClan(Long id) {
+        clanRepo.addCountBossVictoryB1(id);
+    }
+    public void addCountB2forClan(Long id) {
+        clanRepo.addCountBossVictoryB2(id);
+    }
+    public void addCountB3forClan(Long id) {
+        clanRepo.addCountBossVictoryB3(id);
+    }
+    public void addCountB4forClan(Long id) {
+        clanRepo.addCountBossVictoryB4(id);
+    }
+    public void addCountB5forClan(Long id) {
+        clanRepo.addCountBossVictoryB5(id);
+    }
+
+
+
     public double expBarClan(Clan clan) {
 
         double exp_progress = 100/(exp(clan.getLevel())/ (double) clan.getExp());

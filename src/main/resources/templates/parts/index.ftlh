@@ -12,22 +12,31 @@
     <div class="block_zero center"><img src="/img/icon/main_h.jpg" width="100%" alt=""></div>
     <div class="menuList">
         <li><a href="/arena/"><img src="/img/icon/arena.png" alt="">Арена</a></li>
-        <li><a href="/#/"><img src="/img/icon/duel.png" alt="">Карьера<span class="green"> (+)</span></a></li>
+        <li><a href="/#/"><img src="/img/icon/duel.png" alt="">Карьера<span class="green"></span></a></li>
 <#--        <li><a href="/league/"><img src="/images/icon/league.png" alt="">Лига новичков<span-->
 <#--                        class="green"> (+)</span></a>-->
 <#--        </li>-->
-        <li><a href="/cave"><img src="/img/icon/cave.png" alt="">Пещера<span class="green"> (+)</span></a></li>
+        <#if us.getClan()??>
+            <li><a href="/cave"><img src="/img/icon/cave.png" alt="">Пещера<span class="green"> </span>
+                    <span class="grey small"></span>
+                </a></li>
+            <#else>
+            <li><a style="pointer-events: none" href="/cave"><img src="/img/icon/cave.png" alt="">Пещера<span class="green"></span>
+                    <span class="grey small">Нужен клан</span>
+                </a></li>
+        </#if>
+
 <#--        <li><a href="/sage/"><img src="/images/icon/quest.png" alt="">Хижина мудреца<span class="green"> (+)</span></a>-->
 <#--        </li>-->
 <#--        <li><a href="/king/"><img src="/images/icon/king.png" alt="">Король бессмертных <span-->
 <#--                        class="grey">(59:34)</span></a></li>-->
-        <li><a href="/#/"><img src="/img/icon/arena.png" alt="">Сражения<span class="green"> (+)</span></a></li>
+        <li><a href="/#/"><img src="/img/icon/arena.png" alt="">Сражения<span class="green"> </span></a></li>
 <#--        <li><a href="/coliseum/"><img src="/images/icon/coliseum.png" alt="">Колизей</a></li>-->
-        <li><a href="/#/"><img src="/img/icon/farm.png" alt="">Поход<span class="green"> (+)</span></a></li>
+        <li><a href="/#/"><img src="/img/icon/farm.png" alt="">Поход<span class="green"> </span></a></li>
     </div>
     <div class="mini-line"/>
     <div class="menuList">
-        <li><a href="/#/"><img src="/img/icon/equip.png" alt="">Магазин снаряжения<span class="green"> (+)</span></a>
+        <li><a href="/#/"><img src="/img/icon/equip.png" alt="">Магазин снаряжения<span class="green"> </span></a>
         </li>
 <#--        <li><a href="/smith/"><img src="/images/icon/smith.png" alt="">Кузница<br><span class="white small">Руны, заточка, бонус, звезды</span></a>-->
 <#--        </li>-->

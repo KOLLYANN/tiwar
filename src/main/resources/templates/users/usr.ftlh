@@ -57,23 +57,29 @@
 <#--    </div>-->
 <div class="mini-line"></div>
 <div class="block_zero">
-    <#if us.getSkill() < 100>
-    <img src="/img/icon/master.png" alt="" width="30" height="30"
+    <#if us.getSkill() < 50>
+    <img src="/img/icon/l1.png" alt="" width="30" height="30"
          style="float:left;margin-right:3px;margin-top:3px;">
     <span class="blue">Лига новичков</span><br>Mастерство: <b>${us.getSkill()}</b>
     <div style="clear:both;"></div>
 
-    <#elseif us.getSkill() < 200>
-        <img src="/img/icon/l1.png" alt="" width="30" height="30"
+    <#elseif us.getSkill() < 150>
+        <img src="/img/icon/l2.png" alt="" width="30" height="30"
              style="float:left;margin-right:3px;margin-top:3px;"><span
             class="blue">Лига опытных</span><br>Mастерство: <b>${us.getSkill()}</b>
         <div style="clear:both;"></div>
-    <#elseif us.getSkill() < 300>
-    <img src="/img/icon/l2.png" alt="" width="30" height="30"
+    <#elseif us.getSkill() < 200>
+    <img src="/img/icon/l3.png" alt="" width="30" height="30"
          style="float:left;margin-right:3px;margin-top:3px;">
     <span class="blue">Лига претендентов</span><br>Mастерство:
     <b>${us.getSkill()}</b>
     <div style="clear:both;"></div>
+    <#elseif us.getSkill() < 300>
+        <img src="/img/icon/l4.png" alt="" width="30" height="30"
+             style="float:left;margin-right:3px;margin-top:3px;">
+        <span class="blue">Лига претендентов</span><br>Mастерство:
+        <b>${us.getSkill()}</b>
+        <div style="clear:both;"></div>
 <#else>
         <img src="/img/icon/l5.png" alt="" width="30" height="30"
              style="float:left;margin-right:3px;margin-top:3px;"><span

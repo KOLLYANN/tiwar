@@ -21,13 +21,24 @@ public class Clan {
     Long expy;
     Long ownerId;
     Long level;
+    Long countB1;
+    Long countB2;
+    Long countB3;
+    Long countB4;
+    Long countB5;
 
     @OneToMany(mappedBy = "clan", fetch = FetchType.EAGER)
     List<User> users;
 
 
-    public Clan(String title, Long exp,Long expy,Long level, List<User> users, Long ownerId) {
+    public Clan(String title,Long countB1,Long countB2,Long countB3,Long countB4,Long countB5,
+                Long exp,Long expy,Long level, List<User> users, Long ownerId) {
         this.title = title;
+        this.countB1 = countB1;
+        this.countB2 = countB2;
+        this.countB3 = countB3;
+        this.countB4 = countB4;
+        this.countB5 = countB5;
         this.exp = exp;
         this.expy = expy;
         this.level = level;

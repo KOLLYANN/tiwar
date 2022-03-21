@@ -5,6 +5,8 @@ import com.example.SpringLearn.repositories.boss.BossRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class BossService {
 
@@ -18,6 +20,14 @@ public class BossService {
 
     public Boss findBossById(Long id) {
         return bossRepo.findById(id).get();
+    }
+
+    public List<Boss> findAll() {
+        return bossRepo.findAll();
+    }
+
+    public boolean existsBoss(Long id) {
+       return bossRepo.existsById(id);
     }
 
     public void bossOneMinusHealth(Long minusHealth, Long id) {

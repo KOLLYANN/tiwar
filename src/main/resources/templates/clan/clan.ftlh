@@ -22,7 +22,31 @@
                 <div class="progress" style="width:${expClan}%"></div>
             </div>
         </div>
-        <div>
+
+        <div class="mini-line"></div>
+        <div class="block_zero">
+            <a href="/clan/medals/${clan.getId()}">
+                <#if clan.countB1 != 0>
+                    <img src="/img/cave/1.jpg" width="24" height="24" alt="" style="margin-right:3px;margin-top:3px;">
+                </#if>
+                <#if clan.countB2 != 0>
+                    <img src="/img/cave/2.jpg" width="24" height="24" alt="" style="margin-right:3px;margin-top:3px;">
+                </#if>
+                <#if clan.countB3 != 0>
+                    <img src="/img/cave/4.jpg" width="24" height="24" alt="" style="margin-right:3px;margin-top:3px;">
+                </#if>
+                <#if clan.countB4 != 0>
+                    <img src="/img/cave/3.jpg" width="24" height="24" alt="" style="margin-right:3px;margin-top:3px;">
+                </#if>
+                <#if clan.countB5 != 0>
+                    <img src="/img/cave/5.jpg" width="24" height="24" alt="" style="margin-right:3px;margin-top:3px;">
+                </#if>
+            </a>
+            <div style="clear:both;"></div>
+        </div>
+        <div class="mini-line"></div>
+
+
         <div class="menuList">
             <#list clanGetUsers as usersInclan>
                 <#if usersInclan.getId() == clan.getOwnerId()>
@@ -52,7 +76,6 @@
                 </form></li>
         </div>
     <#else>
-
         Создать клан
         <form method="post" action="/clan/create">
             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
@@ -63,7 +86,7 @@
         <a href="/clanrating">Рейтинг кланов</a>
         <div class="line"></div>
     </#if>
-    <div class="line"/>
+    <div class="line"></div>
     <div class="player menuList">
         <li><a href="/profile/${us.getId()}"><img src="/img/icon/user.png" alt="">Мой герой</a></li>
         <li><a href="/clan/"><img src="/img/icon/user.png" alt="">Мой клан<span class="green"> (+)</span></a>
