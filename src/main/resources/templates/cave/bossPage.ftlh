@@ -25,7 +25,7 @@
 
     <div class="menuList">
         <#if boss??>
-            <li><a href="/boss/${boss.getId()}"><img src="/img/cave/${boss.getTitleAva()}.jpg" alt="">
+            <li><a href="/boss/${boss.getId()!"1"}"><img src="/img/cave/${boss.getTitleAva()}.jpg" alt="">
                     ${boss.getName()}
                     <table>
                         <tr>
@@ -116,9 +116,8 @@
         <#else>
             <form method="post" action="/boss/attack" style="padding-top: 10px">
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                <input type="hidden" name="bossId" value="${boss.getId()}">
-                <button disabled style="border: none; background: none" type="submit"><img src="/img/atk.png"
-                                                                                           alt="attack"></button>
+                <input type="hidden" name="bossId" value="${boss.getId()!"1"}">
+                <button disabled style="border: none; background: none" type="submit"><img src="/img/atk.png" alt="attack"></button>
             </form>
         </#if>
     </#if>

@@ -13,7 +13,7 @@ public class ScheduleMethods {
         this.userService = userService;
     }
 
-    @Scheduled(fixedDelay = 5000)
+    @Scheduled(fixedDelay = 60000)
     public void scheduleFixedDelayTask() {
         System.out.println("Add mana and Health");
         userService.plusManaUser();

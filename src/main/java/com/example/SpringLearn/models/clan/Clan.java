@@ -2,13 +2,16 @@ package com.example.SpringLearn.models.clan;
 
 import com.example.SpringLearn.models.user.User;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @Table(name = "clans")
 public class Clan {
@@ -26,14 +29,21 @@ public class Clan {
     Long countB3;
     Long countB4;
     Long countB5;
+    Long goldClan;
+    Long silverClan;
 
-    @OneToMany(mappedBy = "clan", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "clanRequest")
+    List<User> usersRequest;
+
+    @OneToMany(mappedBy = "clan")
     List<User> users;
 
 
-    public Clan(String title,Long countB1,Long countB2,Long countB3,Long countB4,Long countB5,
+    public Clan(String title,Long goldClan,Long silverClan,Long countB1,Long countB2,Long countB3,Long countB4,Long countB5,
                 Long exp,Long expy,Long level, List<User> users, Long ownerId) {
         this.title = title;
+        this.goldClan = goldClan;
+        this.silverClan = silverClan;
         this.countB1 = countB1;
         this.countB2 = countB2;
         this.countB3 = countB3;

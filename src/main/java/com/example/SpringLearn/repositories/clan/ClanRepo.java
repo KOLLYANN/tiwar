@@ -16,6 +16,17 @@ public interface ClanRepo extends JpaRepository<Clan, Long> {
     @Query("update Clan c set c.level = c.level + 1, c.exp = 0, c.expy =:expy where c.id = :id")
     void updateClanLevel(@Param("id") Long id, @Param("expy") Long expy);
 
+
+    @Transactional
+    @Modifying
+    @Query("update Clan c set c.goldClan = c.goldClan + :addGoldClan where c.id = :id")
+    void addGoldInClan(@Param("addGoldClan") Long addGoldClan, @Param("id") Long id);
+
+    @Transactional
+    @Modifying
+    @Query("update Clan c set c.silverClan = c.silverClan + :addSilverClan where c.id = :id")
+    void addSilverInClan(@Param("addSilverClan") Long addSilverClan, @Param("id") Long id);
+
     @Transactional
     @Modifying
     @Query("update Clan c set c.countB1 = c.countB1 + 1, c.exp = c.exp + 55 where c.id = :id")

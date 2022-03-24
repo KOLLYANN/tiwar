@@ -2,9 +2,7 @@ package com.example.SpringLearn.models;
 
 import com.example.SpringLearn.models.user.Role;
 import com.example.SpringLearn.models.user.User;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.List;
@@ -12,7 +10,8 @@ import java.util.Set;
 
 @Entity
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @EqualsAndHashCode
 public class Boss {
 

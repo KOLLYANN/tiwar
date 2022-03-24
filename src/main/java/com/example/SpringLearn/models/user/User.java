@@ -1,20 +1,22 @@
 package com.example.SpringLearn.models.user;
 
 import com.example.SpringLearn.models.clan.Clan;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.example.SpringLearn.models.thing.Thing;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 @Table(name = "usr")
 public class User implements UserDetails {
     @Id
@@ -44,6 +46,7 @@ public class User implements UserDetails {
     Long skillPower;
     Long skillMaxPower;
 
+
     Long idBossAttack;
     Long bossDamage;
 
@@ -65,9 +68,17 @@ public class User implements UserDetails {
         return userGold;
     }
 
+    Long amountGoldForClan;
+    Long amountSilverForClan;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne
     Clan clan;
+
+    @ManyToOne
+    Clan clanRequest;
+
+    @OneToMany(mappedBy = "user", cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    List<Thing> things;
 
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)

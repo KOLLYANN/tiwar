@@ -12,11 +12,12 @@
     <#if clan??>
         <div class="block_zero">
             <div class="gerb ibl fl mr5" style="background-image:url(/img/clanAva.png);"><img
-                        src="/img/clanAva.png" width="54" height="54" alt=""></div>
+                        src="/img/clanAva.jpg" width="54" height="54" alt=""></div>
             <img src="/img/icon/clan/0.png" alt=""> <b>${clan.getTitle()}</b> <br>
             <img src="/img/icon/level.png" alt=""> Уровень: <b>${clan.getLevel()}</b>
             <br>
-            <img src="/img/icon/exp.png" alt=""> Опыт: ${clan.getExp()}/${clan.getExpy()}  <span class="grey">(${expPercentClan}%)</span><br>
+            <img src="/img/icon/exp.png" alt=""> Опыт: ${clan.getExp()}/${clan.getExpy()} <span
+                    class="grey">(${expPercentClan}%)</span><br>
             <div style="clear:both;"></div>
             <div class="stat_bar">
                 <div class="progress" style="width:${expClan}%"></div>
@@ -45,8 +46,30 @@
             <div style="clear:both;"></div>
         </div>
         <div class="mini-line"></div>
+        <#list clanGetUsers as usUsersInClan>
+            <#if usUsersInClan.getId() == us.getId()>
+        <div class="menuList">
+            <li class="original"><a class="white" href="/clan/${clan.getId()}/money/">
+                    <img src="/img/icon/chest.png" alt="" height="30px" width="30px"
+                         style="float:left;margin-top:3px;">
+                    <img src="/img/icon/gold.png" alt="">Казна клана<br><span class="medium">
+                    <img src="/img/icon/silver.png" alt="silver">${clan.getSilverClan()}
+                    <img src="/img/icon/gold.png" alt="gold">${clan.getGoldClan()}</span></a></li>
+        </div>
+        </#if>
+        </#list>
+        <div class="mini-line"></div>
+        <div class="menuList">
+            <#if id == clan.getOwnerId()>
+            <li><a href="/clan/${clan.getId()}/request/"><img src="/img/icon/journal.png" alt="">Заявки в клан</a></li>
+            </#if>
+            <li><a style="padding-bottom:0px;" href="#">
+                    <img src="/img/icon/chat.png" alt="">Чат клана<span class="green"> (+)</span></a></li>
+        </div>
 
 
+
+        <div class="mini-line"></div>
         <div class="menuList">
             <#list clanGetUsers as usersInclan>
                 <#if usersInclan.getId() == clan.getOwnerId()>
@@ -69,22 +92,31 @@
         </div>
         <div class="line"></div>
         <div class="menuList">
-            <li> <form method="post" action="/clan/unsubscribe">
+            <li>
+                <form method="post" action="/clan/unsubscribe">
                     <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                     <#--            <input type="hidden" name="id" value="${clan.getId()}">-->
                     <button type="submit">Выйти</button>
-                </form></li>
+                </form>
+            </li>
         </div>
     <#else>
-        Создать клан
-        <form method="post" action="/clan/create">
-            <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-            <input type="text" name="title" placeholder="Имя клана" required>
-            <button type="submit">Создать</button>
-        </form>
+        <div class="block_zero center">
+            <form action="/clan/create" method="post">
+                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                <div>Название клана: <br>
+                    <input type="text" class="text medium-text" name="title" maxlength="20" value="">
+                    <div class="mb10"></div>
+                    <span class="btn "><span class="end"><input class="label" type="submit" value="Создать клан">Создать клан</span></span>
+                </div>
+            </form>
+            <span class="grey">Цена: <img src="/img/icon/gold.png" alt="">2500 золота</span></div>
         <div class="line"></div>
-        <a href="/clanrating">Рейтинг кланов</a>
-        <div class="line"></div>
+        <div class="menuList">
+            <li><a href="/clanrating/"><img src="/img/icon/train.png" alt="">Рейтинг кланов<span
+                            class="green"></span></a>
+            </li>
+        </div>
     </#if>
     <div class="line"></div>
     <div class="player menuList">
@@ -108,6 +140,4 @@
         <span class="small grey"><!-- 100 --> ${aTime?iso_utc}
             <br>vk.com/kolya0598 © 2022, 18+</span>
     </div>
-
-
 </@c.page>

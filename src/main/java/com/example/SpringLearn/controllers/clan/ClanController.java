@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -76,8 +77,12 @@ public class ClanController {
         List<User> clanUsers = clanById.get().getUsers().stream()
                 .sorted((u1, u2) -> u2.getExpForClan().compareTo(u1.getExpForClan())).collect(Collectors.toList());
 
+        Optional<User> ownerClan = clanUsers.stream()
+                .filter(u -> u.getClan().getOwnerId() == clanById.get().getOwnerId()).findFirst();
+
         model.addAttribute("clan", clanById.get());
         model.addAttribute("clanGetUsers", clanUsers);
+        model.addAttribute("ownerClan", ownerClan.get());
         model.addAttribute("user", userService.findUserById(user.getId()));
         model.addAttribute("us", userService.findUserById(user.getId()));
         model.addAttribute("expClan", clanService.expBarClan(clanById.get()));
@@ -105,6 +110,55 @@ public class ClanController {
         return "clan/clanMedals";
     }
 
+    @GetMapping("/{id}/money")
+    public String getClanMoney(
+            @AuthenticationPrincipal User user,
+            @PathVariable("id") Long id,
+            Model model
+    ) {
+
+        User userById = userService.findUserById(user.getId());
+        if(userById.getClan().getId() == id) {
+            Clan clan = clanService.findClanById(userById.getClan().getId()).get();
+
+            model.addAttribute("us", userById);
+            model.addAttribute("clan", clan);
+            model.addAttribute("exp", userService.expBar(userService.findUserByIdt(user.getId()).get()));
+        } else {
+            return "redirect:/";
+        }
+        return "clan/clanMoney";
+    }
+
+    @PostMapping("/{id}/addMoney")
+    public String addMoneyClan(
+            @AuthenticationPrincipal User user,
+            @PathVariable("id") Long id,
+            @RequestParam("silver") Long silver,
+            @RequestParam("gold") Long gold,
+            Model model
+    ) {
+        User userById = userService.findUserById(user.getId());
+        Clan clan = userById.getClan();
+
+        if(userById.getClan().getId() == id) {
+            if(userById.getUserGold() > gold) {
+                clanService.addGoldInClan(gold, clan.getId());
+                userService.addGoldForClan(gold, userById.getId());
+            }
+            if(userById.getSilver() > silver) {
+                clanService.addSilverInClan(silver, clan.getId());
+                userService.addSilverForClan(silver, userById.getId());
+            }
+
+        } else {
+            return "redirect:/";
+        }
+
+
+        return "redirect:/clan/" + userById.getClan().getId() + "/money";
+    }
+
 
     @PostMapping("/create")
     public String clanCreate(
@@ -112,12 +166,12 @@ public class ClanController {
             @RequestParam("title") String title
     ) {
         Optional<User> userByIdt = userService.findUserByIdt(authUser.getId());
-        if(userByIdt.get().getClan() == null) {
-            Clan clan = new Clan(title, 0L,0L,0L,0L,0L,
+        if(userByIdt.get().getClan() == null && userByIdt.get().getGold() >= 2500) {
+            Clan clan = new Clan(title,0L,0L, 0L,0L,0L,0L,0L,
                     0L,360L,1L ,List.of(authUser), userByIdt.get().getId());
             Clan clan1 = clanService.saveClan(clan);
             userByIdt.get().setClan(clan1);
-            //add exp in clan
+            userService.minusGoldForClanCreate(userByIdt.get().getId());
             userService.saveUser(userByIdt.get());
         }
 
@@ -130,21 +184,13 @@ public class ClanController {
             @RequestParam("id") Long id
     ) {
         Optional<Clan> clanById = clanService.findClanById(id);
-        List<User> users = clanById.get().getUsers();
         User userById = userService.findUserById(user.getId());
 
-        for(User us : users) {
-            if(us.getIdBossAttack() != null) {
-                userById.setIdBossAttack(us.getIdBossAttack());
-                userById.setBossDamage(0L);
-            }
-        }
-        userById.setClan(clanById.get());
-
-
+        clanService.saveClan(clanById.get());
+        userById.setClanRequest(clanById.get());
         userService.saveUser(userById);
 
-        return "redirect:/clan";
+        return "redirect:/clan/" + id;
     }
 
     @PostMapping("/unsubscribe")
@@ -156,7 +202,10 @@ public class ClanController {
         if(!Objects.equals(userById.getId(), userById.getClan().getOwnerId())) {
             userById.setClan(null);
             userById.setBossDamage(null);
+            userById.setIdBossAttack(null);
             userById.setExpForClan(0L);
+            userById.setAmountGoldForClan(0L);
+            userById.setAmountSilverForClan(0L);
             userService.saveUser(userById);
         } else {
             System.out.println("Создатель");
@@ -168,6 +217,8 @@ public class ClanController {
                 us.setClan(null);
                 us.setIdBossAttack(null);
                 us.setBossDamage(null);
+                us.setAmountGoldForClan(0L);
+                us.setAmountSilverForClan(0L);
                 us.setExpForClan(0L);
                 userService.saveUser(us);
             }

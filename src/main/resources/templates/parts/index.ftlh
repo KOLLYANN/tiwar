@@ -36,7 +36,7 @@
     </div>
     <div class="mini-line"/>
     <div class="menuList">
-        <li><a href="/#/"><img src="/img/icon/equip.png" alt="">Магазин снаряжения<span class="green"> </span></a>
+        <li><a href="/shop/"><img src="/img/icon/equip.png" alt="">Магазин снаряжения<span class="green"> </span></a>
         </li>
 <#--        <li><a href="/smith/"><img src="/images/icon/smith.png" alt="">Кузница<br><span class="white small">Руны, заточка, бонус, звезды</span></a>-->
 <#--        </li>-->

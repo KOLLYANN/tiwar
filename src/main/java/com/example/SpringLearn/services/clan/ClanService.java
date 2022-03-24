@@ -52,7 +52,12 @@ public class ClanService {
         clanRepo.addCountBossVictoryB5(id);
     }
 
-
+    public void addGoldInClan(Long addGold, Long id) {
+        clanRepo.addGoldInClan(addGold, id);
+    }
+    public void addSilverInClan(Long addSilver, Long id) {
+        clanRepo.addSilverInClan(addSilver, id);
+    }
 
     public double expBarClan(Clan clan) {
 
@@ -61,7 +66,6 @@ public class ClanService {
         if(exp_progress > 100) {
             exp_progress = 100;
         }
-
         return Math.floor(exp_progress);
     }
 

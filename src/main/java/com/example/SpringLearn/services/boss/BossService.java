@@ -4,8 +4,12 @@ import com.example.SpringLearn.models.Boss;
 import com.example.SpringLearn.repositories.boss.BossRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BossService {
@@ -18,8 +22,8 @@ public class BossService {
     }
 
 
-    public Boss findBossById(Long id) {
-        return bossRepo.findById(id).get();
+    public Optional<Boss> findBossById(Long id) {
+        return bossRepo.findById(id);
     }
 
     public List<Boss> findAll() {
@@ -38,6 +42,7 @@ public class BossService {
         bossRepo.save(boss);
     }
 
+    @Transactional
     public void deleteBoss(Boss boss) {
         bossRepo.delete(boss);
     }

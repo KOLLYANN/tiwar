@@ -16,7 +16,7 @@
         <div class="mini-line"/>
         <#list clans as clan>
             <div class="block_zero"><span class="white"></span>${clan?counter}.
-                <img src="/img/clanAva.png" style="width: 15px; height: 15px" alt="">
+                <img src="/img/clanAva.jpg" style="width: 15px; height: 15px" alt="">
                 <a href="/clan/${clan.getId()}">${clan.getTitle()}</a><br>Уровень: <img src="/img/icon/level.png" alt="">
                 <b>${clan.getLevel()}</b>
             </div>

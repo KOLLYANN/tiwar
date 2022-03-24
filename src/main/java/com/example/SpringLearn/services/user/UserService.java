@@ -41,6 +41,14 @@ public class UserService implements UserDetailsService {
         this.personService = personService;
     }
 
+    public void buyThing(Long priceThing, Long id) {
+        userRepo.buyThing(priceThing, id);
+    }
+
+    public void sellThing(Long priceThing, Long id) {
+        userRepo.sellThing(priceThing, id);
+    }
+
     public void plusUserPowerByTrain(Long id) {
         userRepo.plusUserPowerByTrain(id);
     }
@@ -78,7 +86,13 @@ public class UserService implements UserDetailsService {
         userRepo.updateBossAttack(idBoss,id);
     }
 
+    public void minusUserParametersThing(Long parameters, Long id) {
+        userRepo.minusUserParametersThing(parameters, id);
+    }
 
+    public void plusUserParametersThing(Long parameters, Long id) {
+        userRepo.plusUserParametersThing(parameters, id);
+    }
 
 
 
@@ -118,6 +132,17 @@ public class UserService implements UserDetailsService {
         if (user.getClan() != null) {
             userRepo.updateExpClan(user.getClan().getId(), expAddForClan);
         }
+    }
+
+    public void addGoldForClan(Long addAmountGold, Long id) {
+        userRepo.addGoldForClan(addAmountGold, id);
+    }
+    public void addSilverForClan(Long addAmountSilver, Long id) {
+        userRepo.addSilverForClan(addAmountSilver, id);
+    }
+
+    public void minusGoldForClanCreate(Long id) {
+        userRepo.minusGoldForClanCreate(id);
     }
 
     public void updateExpAndSilverUserAtCave(Long exp, Long silver, Long userId) {
@@ -185,6 +210,8 @@ public class UserService implements UserDetailsService {
         user.setActiveCode(false);
         user.setUserLevel(1L);
         user.setUserGold(0L);
+        user.setAmountGoldForClan(0L);
+        user.setAmountSilverForClan(0L);
         user.setSkill(0L);
         user.setSilver(5000L);
         user.setMana(1000L);
@@ -253,7 +280,6 @@ public class UserService implements UserDetailsService {
         return false;
     }
 
-    @Transactional
     public void saveUser(User user) {
         userRepo.save(user);
     }

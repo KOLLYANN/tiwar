@@ -948,6 +948,11 @@ input.large, textarea.large {
     width: 50%
 }
 
+.it_brd.q2 {
+    color: #0bb00b;
+    background-image: url(/img/things/bg.png);
+}
+
 .sh8 {
     text-shadow: 0 0 1px #000, 0 0 1px #000, 0 0 1px #000, 0 0 1px #000, 0 0 1px #000, 0 0 1px #000, 0 0 1px #000, 0 0 1px #000
 }

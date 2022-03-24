@@ -13,7 +13,7 @@
     <#if clan??>
         <div class="block_zero">
             <div class="gerb ibl fl mr5" style="background-image:url(/img/clanAva.png);"><img
-                        src="/img/clanAva.png" width="54" height="54" alt=""></div>
+                        src="/img/clanAva.jpg" width="54" height="54" alt=""></div>
             <img src="/img/icon/clan/0.png" alt=""> <b>${clan.getTitle()}</b> <br>
             <img src="/img/icon/level.png" alt=""> Уровень: <b>${clan.getLevel()}</b>
             <br>
@@ -27,7 +27,7 @@
 
 
         <div class="block_zero">
-            <a href="clan/medals/${clan.getId()}">
+            <a href="/clan/medals/${clan.getId()}">
                 <#if clan.countB1 != 0>
                     <img src="/img/cave/1.jpg" width="24" height="24" alt="" style="margin-right:3px;margin-top:3px;">
                 </#if>
@@ -50,16 +50,12 @@
 
         <div>
         <div class="menuList">
-            <#list clanGetUsers as usersInclan>
-                <#if usersInclan.getId() == clan.getOwnerId()>
-                    <li><a style="padding-bottom:2px;padding-top:2px;" href="/profile/${usersInclan.getId()}">
+                    <li><a style="padding-bottom:2px;padding-top:2px;" href="/profile/${ownerClan.getId()}">
                             <img src="/img/ownerClan.png" width="25px" height="25px"
-                                 alt=""> ${usersInclan.getUsername()}<span class="not_here white">'</span>,
+                                 alt=""> ${ownerClan.getUsername()}<span class="not_here white">'</span>,
                             <span class="white"><span class="green">Лидер клана</span></span><br>
-                            <span class="grey"> ${usersInclan.getExpForClan()} опыта</span></a>
+                            <span class="grey"> ${ownerClan.getExpForClan()} опыта</span></a>
                     </li>
-                </#if>
-            </#list>
             <#list clanGetUsers as usersInclan>
                 <#if usersInclan.getId() != clan.getOwnerId()>
                     <li><a style="padding-bottom:2px;padding-top:2px;" href="/profile/${usersInclan.getId()}">
@@ -69,13 +65,14 @@
                 </#if>
             </#list>
         </div>
+        <div class="mini-line"></div>
         <div class="menuList">
             <li>
                 <#if us.getClan()?? == false>
                     <form method="post" action="/clan/subscribe">
                         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                         <input type="hidden" name="id" value="${clan.getId()}">
-                        <button type="submit">Вступить</button>
+                        <button type="submit">Подать заявку</button>
                     </form>
                 </#if>
             </li>

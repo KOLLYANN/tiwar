@@ -76,6 +76,17 @@ public interface UserRepo extends JpaRepository<User, Long> {
 
     @Modifying
     @Transactional
+    @Query("update User u set u.userGold = u.userGold + :priceThing where u.id = :id")
+    void sellThing(@Param("priceThing")Long priceThing, @Param("id") Long id);
+
+    @Modifying
+    @Transactional
+    @Query("update User u set u.userGold = u.userGold - :priceThing where u.id = :id")
+    void buyThing(@Param("priceThing")Long priceThing, @Param("id") Long id);
+
+
+    @Modifying
+    @Transactional
     @Query("update User u set u.health = u.health + 28 where u.id = :id")
     void plusUserHealth(@Param("id") Long id);
 
@@ -84,6 +95,19 @@ public interface UserRepo extends JpaRepository<User, Long> {
     @Query("update User u set u.power = u.power + 10, u.skill = u.skill + 1," +
             " u.pricePower = u.pricePower + 500,u.skillPower = u.skillPower + 1, u.silver = u.silver - u.pricePower where u.id = :id")
     void plusUserPowerByTrain(@Param("id") Long id);
+
+
+    @Modifying
+    @Transactional
+    @Query("update User u set u.power = u.power + :parameter , u.maxHealth = u.maxHealth + :parameter," +
+            " u.maxMana = u.maxMana + :parameter where u.id = :id")
+    void plusUserParametersThing(@Param("parameter") Long parameters, @Param("id") Long id);
+
+    @Modifying
+    @Transactional
+    @Query("update User u set u.power = u.power - :parameter , u.maxHealth = u.maxHealth - :parameter," +
+            " u.maxMana = u.maxMana - :parameter where u.id = :id")
+    void minusUserParametersThing(@Param("parameter") Long parameters, @Param("id") Long id);
 
     @Modifying
     @Transactional
@@ -112,4 +136,22 @@ public interface UserRepo extends JpaRepository<User, Long> {
     @Modifying
     @Query("update User c set c.userLevel = c.userLevel + 1, c.userGold = c.userGold + (c.userLevel * 3), c.exp = 0, c.expy = :expy where c.id = :id")
     public void updateUserLevel(@Param("id") Long id, @Param("expy") Long expy);
+
+    @Transactional
+    @Modifying
+    @Query("update User u set u.userGold = u.userGold - 2500 where u.id = :id")
+    void minusGoldForClanCreate(@Param("id") Long id);
+
+    @Transactional
+    @Modifying
+    @Query("update User u set u.userGold = u.userGold - :addGoldClan," +
+            " u.amountGoldForClan = u.amountGoldForClan + :addGoldClan where u.id = :id")
+    void addGoldForClan(@Param("addGoldClan") Long addGoldClan, @Param("id") Long id);
+
+    @Transactional
+    @Modifying
+    @Query("update User u set u.silver = u.silver - :addSilverClan," +
+            " u.amountSilverForClan = u.amountSilverForClan + :addSilverClan where u.id = :id")
+    void addSilverForClan(@Param("addSilverClan") Long addSilverClan, @Param("id") Long id);
+
 }
