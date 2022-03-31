@@ -13,7 +13,7 @@
     <#if clan??>
         <div class="block_zero">
             <div class="gerb ibl fl mr5" style="background-image:url(/img/clanAva.png);"><img
-                        src="/img/clanAva.jpg" width="54" height="54" alt=""></div>
+                        src="/img/clanAva.png" width="54" height="54" alt=""></div>
             <img src="/img/icon/clan/0.png" alt=""> <b>${clan.getTitle()}</b> <br>
             <img src="/img/icon/level.png" alt=""> Уровень: <b>${clan.getLevel()}</b>
             <br>
@@ -29,19 +29,34 @@
         <div class="block_zero">
             <a href="/clan/medals/${clan.getId()}">
                 <#if clan.countB1 != 0>
-                    <img src="/img/cave/1.jpg" width="24" height="24" alt="" style="margin-right:3px;margin-top:3px;">
+                    <img src="/img/cave/1.png" width="40" height="40" alt="" style="margin-right:3px;margin-top:3px;">
                 </#if>
                 <#if clan.countB2 != 0>
-                    <img src="/img/cave/2.jpg" width="24" height="24" alt="" style="margin-right:3px;margin-top:3px;">
+                    <img src="/img/cave/2.png"  width="40" height="40" alt="" style="margin-right:3px;margin-top:3px;">
                 </#if>
                 <#if clan.countB3 != 0>
-                    <img src="/img/cave/4.jpg" width="24" height="24" alt="" style="margin-right:3px;margin-top:3px;">
+                    <img src="/img/cave/4.png"  width="40" height="40" alt="" style="margin-right:3px;margin-top:3px;">
                 </#if>
                 <#if clan.countB4 != 0>
-                    <img src="/img/cave/3.jpg" width="24" height="24" alt="" style="margin-right:3px;margin-top:3px;">
+                    <img src="/img/cave/3.png"  width="40" height="40" alt="" style="margin-right:3px;margin-top:3px;">
                 </#if>
                 <#if clan.countB5 != 0>
-                    <img src="/img/cave/5.jpg" width="24" height="24" alt="" style="margin-right:3px;margin-top:3px;">
+                    <img src="/img/cave/5.png"  width="40" height="40" alt="" style="margin-right:3px;margin-top:3px;">
+                </#if>
+                <#if clan.countB6 != 0>
+                    <img src="/img/cave/6.png"  width="40" height="40" alt="" style="margin-right:3px;margin-top:3px;">
+                </#if>
+                <#if clan.countB7 != 0>
+                    <img src="/img/cave/7.png"  width="40" height="40" alt="" style="margin-right:3px;margin-top:3px;">
+                </#if>
+                <#if clan.countB8 != 0>
+                    <img src="/img/cave/8.png"  width="40" height="40" alt="" style="margin-right:3px;margin-top:3px;">
+                </#if>
+                <#if clan.countB9 != 0>
+                    <img src="/img/cave/9.png"  width="40" height="40" alt="" style="margin-right:3px;margin-top:3px;">
+                </#if>
+                <#if clan.countB10 != 0>
+                    <img src="/img/cave/10.png"  width="40" height="40" alt="" style="margin-right:3px;margin-top:3px;">
                 </#if>
             </a>
             <div style="clear:both;"></div>
@@ -51,7 +66,7 @@
         <div>
         <div class="menuList">
                     <li><a style="padding-bottom:2px;padding-top:2px;" href="/profile/${ownerClan.getId()}">
-                            <img src="/img/ownerClan.png" width="25px" height="25px"
+                            <img src="/img/ownerClan.png" width="20px" height="20px"
                                  alt=""> ${ownerClan.getUsername()}<span class="not_here white">'</span>,
                             <span class="white"><span class="green">Лидер клана</span></span><br>
                             <span class="grey"> ${ownerClan.getExpForClan()} опыта</span></a>
@@ -93,7 +108,7 @@
             <img src="/img/icon/silver.png" alt="e"> ${us.getSilver()}
         </div>
         <div class="mini-line" style="margin-top: 10px"></div>
-        <div class="center "><br><span class="grey"><a href="">Форум</a> | <a href="">Чат</a> | <a
+        <div class="center "><br><span class="grey"><a href="">Форум</a> | <a href="/chat">Чат</a> | <a
                         href="/rating/">Рейтинг</a></span>
             <div class="mb10"></div>
             <span class="small grey"><!-- 100 --> ${aTime?iso_utc}

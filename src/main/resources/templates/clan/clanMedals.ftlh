@@ -17,14 +17,17 @@
     </div>
     <div class="line"  style="margin-bottom: 10px"></div>
     <div class="menuList">
-        <li><img src="/img/cave/1.jpg" alt="">Дядя ваня <span class="error">${clan.getCountB1()}</span></li>
-        <li><img src="/img/cave/2.jpg" alt="">Топор <span class="error">${clan.getCountB2()}</span></li>
-        <li><img src="/img/cave/4.jpg" alt="">Монгол <span class="error">${clan.getCountB3()}</span></li>
-        <li><img src="/img/cave/3.jpg" alt="">Авторитет <span class="error">${clan.getCountB4()}</span></li>
-        <li><img src="/img/cave/5.jpg" alt="">Поль <span class="error">${clan.getCountB5()}</span></li>
+        <li><img src="/img/cave/1.png" alt="">Циклоп <span class="error">${clan.getCountB1()}</span></li>
+        <li><img src="/img/cave/2.png" alt="">Кентавр <span class="error">${clan.getCountB2()}</span></li>
+        <li><img src="/img/cave/4.png" alt="">Гаргона <span class="error">${clan.getCountB3()}</span></li>
+        <li><img src="/img/cave/3.png" alt="">Минотавр <span class="error">${clan.getCountB4()}</span></li>
+        <li><img src="/img/cave/5.png" alt="">Амазонка <span class="error">${clan.getCountB5()}</span></li>
+        <li><img src="/img/cave/6.png" alt="">Цербер <span class="error">${clan.getCountB6()}</span></li>
+        <li><img src="/img/cave/7.png" alt="">Сирена <span class="error">${clan.getCountB7()}</span></li>
+        <li><img src="/img/cave/8.png" alt="">Анубис <span class="error">${clan.getCountB8()}</span></li>
+        <li><img src="/img/cave/9.png" alt="">Хаос <span class="error">${clan.getCountB9()}</span></li>
+        <li><img src="/img/cave/10.png" alt="">Аид <span class="error">${clan.getCountB10()}</span></li>
     </div>
-
-
         <div class="line"  style="margin-top: 10px"></div>
     <div class="player menuList">
         <li><a href="/profile/${user.getId()}"><img src="/img/icon/user.png" alt="">Мой герой</a></li>
@@ -41,7 +44,7 @@
             <img src="/img/icon/silver.png" alt="e"> ${us.getSilver()}
         </div>
         <div class="mini-line" style="margin-top: 10px"></div>
-        <div class="center "><br><span class="grey"><a href="">Форум</a> | <a href="">Чат</a> | <a
+        <div class="center "><br><span class="grey"><a href="">Форум</a> | <a href="/chat">Чат</a> | <a
                         href="/rating/">Рейтинг</a></span>
             <div class="mb10"></div>
             <span class="small grey"><!-- 100 --> ${aTime?iso_utc}

@@ -18,6 +18,11 @@ public class ThingService {
         this.thingRepo = thingRepo;
     }
 
+
+    public void upThing(Long id) {
+        thingRepo.upThing(id);
+    }
+
     public List<Thing> findAll() {
         return thingRepo.findAll();
     }

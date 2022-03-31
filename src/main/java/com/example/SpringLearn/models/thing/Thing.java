@@ -22,17 +22,22 @@ public class Thing {
     Long parameters;
     String pathImage;
     String grade;
+    String quality;
+    String border;
     Long position;
+    String miniGrade;
     Long skillGrade;
     String place;
     Long state;
     Long price;
+    Long smith;
 
     @ManyToOne(cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     User user;
 
     public Thing(String title, Long parameters, String pathImage,
-                 String grade, Long position, Long skillGrade, String place, Long state, Long price) {
+                 String grade, Long position, Long skillGrade, String place,
+                 Long state, Long price, String quality, String border, Long smith, String miniGrade) {
         this.title = title;
         this.parameters = parameters;
         this.pathImage = pathImage;
@@ -42,5 +47,9 @@ public class Thing {
         this.place = place;
         this.state = state;
         this.price = price;
+        this.quality = quality;
+        this.border = border;
+        this.smith = smith;
+        this.miniGrade = miniGrade;
     }
 }

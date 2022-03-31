@@ -5,7 +5,7 @@
         <link rel="stylesheet" type="text/css" href="/static/bt.css">
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width,maximum-scale=1.0,initial-scale=1.0,user-scalable=no">
-        <title>ТТ</title>
+        <title>Гладиаторы онлайн</title>
     </head>
     <body style="-webkit-text-size-adjust:none;">
     <div id="topdiv">

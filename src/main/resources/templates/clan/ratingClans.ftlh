@@ -16,7 +16,7 @@
         <div class="mini-line"/>
         <#list clans as clan>
             <div class="block_zero"><span class="white"></span>${clan?counter}.
-                <img src="/img/clanAva.jpg" style="width: 15px; height: 15px" alt="">
+                <img src="/img/clanAva.png" style="width: 15px; height: 15px" alt="">
                 <a href="/clan/${clan.getId()}">${clan.getTitle()}</a><br>Уровень: <img src="/img/icon/level.png" alt="">
                 <b>${clan.getLevel()}</b>
             </div>
@@ -45,7 +45,7 @@
             <img src="/img/icon/silver.png" alt="e"> ${us.getSilver()}
         </div>
         <div class="mini-line" style="margin-top: 10px"></div>
-        <div class="center "><br><span class="grey"><a href="">Форум</a> | <a href="">Чат</a> | <a
+        <div class="center "><br><span class="grey"><a href="">Форум</a> | <a href="/chat">Чат</a> | <a
                         href="/rating/">Рейтинг</a></span>
             <div class="mb10"></div>
             <span class="small grey"><!-- 100 --> ${aTime?iso_utc}

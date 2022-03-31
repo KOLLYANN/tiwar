@@ -1044,7 +1044,8 @@ input.large, textarea.large {
 }
 
 .p_dummy .brd {
-    background-repeat: no-repeat
+    background-repeat: no-repeat;
+    /*background-image: url(/img/things/pd.png);*/
 }
 
 .p_dummy_wide {
@@ -1079,6 +1080,7 @@ input.large, textarea.large {
 
 .it_brd.q2 {
     color: #0bb00b;
+    background-image: url(/img/things/bg.png);
 }
 
 .it_brd.q2p {
@@ -1087,6 +1089,7 @@ input.large, textarea.large {
 
 .it_brd.q3 {
     color: #09688b;
+    background-image: url(/img/things/bg3.png);
 }
 
 .it_brd.q3p {
@@ -1095,6 +1098,7 @@ input.large, textarea.large {
 
 .it_brd.q4 {
     color: #990cd3;
+    background-image: url(/img/things/bg4.png);
 }
 
 .it_brd.q4p {
@@ -1103,10 +1107,12 @@ input.large, textarea.large {
 
 .it_brd.q5, .it_brd.q5p {
     color: #e0700c;
+    background-image: url(/img/things/bg5.png);
 }
 
 .it_brd.q6 {
     color: #df2f00;
+    background-image: url(/img/things/bg6.png);
 }
 
 .it_brd.q6p {
@@ -1338,6 +1344,7 @@ input.large, textarea.large {
 }
 
 .block_fight.coliseum {
+    background-image: url("/img/coliseum.jpg");
 
 }
 
@@ -1379,7 +1386,7 @@ input.large, textarea.large {
 }
 
 .fprg {
-    height: 3px;
+    height: 5px;
     width: 108px;
     margin: 5px auto 2px;
     border: 1px solid #c90;

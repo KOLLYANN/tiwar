@@ -1,7 +1,7 @@
 <#import "../parts/comp.ftlh" as c>
 <#include "../parts/security.ftlh">
 <@c.page>
-    <div class="head " style="position:relative;" onclick="location.href='/';"><span class="ttl fl">Пещера</span>
+    <div class="head " style="position:relative;" onclick="location.href='/';"><span class="ttl fl">Олимп</span>
         <span class="bl rght nwr"><img src="/img/icon/health.png" alt="hp"> <span class="white">${us.getHealth()}</span>
             | <img src="/img/icon/mana.png" alt="mp"> ${us.getMana()}</span>
         <div class="clr"></div>
@@ -14,16 +14,21 @@
     <div class="line"></div>
     <div class="menuList">
         <#if us.getIdBossAttack()??>
-        <li><a href="/boss/${us.getIdBossAttack()!"1"}"><img src="/img/cave/1.jpg" alt="">Дядя ваня <span class="white"></span></a>
+        <li><a href="/boss/${us.getIdBossAttack()!"1"}"><img src="/img/cave/1.png" alt="">Циклоп<span class="white"></span></a>
         </li>
             <#else>
-                <li><a href="/boss/1"><img src="/img/cave/1.jpg" alt="">Дядя ваня <span class="white"></span></a>
+                <li><a href="/boss/1"><img src="/img/cave/1.png" alt="">Циклоп <span class="white"></span></a>
                 </li>
         </#if>
-        <li><a href="/boss/2"><img src="/img/cave/2.jpg" alt="">Топор <span class="white"></span></a></li>
-        <li><a href="/boss/3"><img src="/img/cave/4.jpg" alt="">Монгол</a></li>
-        <li><a href="/boss/4"><img src="/img/cave/3.jpg" alt="">Авторитет</a></li>
-        <li><a href="/boss/5"><img src="/img/cave/5.jpg" alt="">Поль</a></li>
+        <li><a href="/boss/2"><img src="/img/cave/2.png" alt="">Кентавр <span class="white"></span></a></li>
+        <li><a href="/boss/3"><img src="/img/cave/4.png" alt="">Гаргона</a></li>
+        <li><a href="/boss/4"><img src="/img/cave/3.png" alt="">Минотавр</a></li>
+        <li><a href="/boss/5"><img src="/img/cave/5.png" alt="">Амазонка</a></li>
+        <li><a href="/boss/6"><img src="/img/cave/6.png" alt="">Цербер</a></li>
+        <li><a href="/boss/7"><img src="/img/cave/7.png" alt="">Сирена</a></li>
+        <li><a href="/boss/8"><img src="/img/cave/8.png" alt="">Анубис</a></li>
+        <li><a href="/boss/9"><img src="/img/cave/9.png" alt="">Хаос</a></li>
+        <li><a href="/boss/10"><img src="/img/cave/10.png" alt="">Аид</a></li>
     </div>
 
 
@@ -43,7 +48,7 @@
         <img src="/img/icon/silver.png" alt="e"> ${us.getSilver()}
     </div>
     <div class="mini-line" style="margin-top: 10px"></div>
-    <div class="center "><br><span class="grey"><a href="">Форум</a> | <a href="">Чат</a> | <a
+    <div class="center "><br><span class="grey"><a href="">Форум</a> | <a href="/chat">Чат</a> | <a
                     href="/rating/">Рейтинг</a></span>
         <div class="mb10"></div>
         <span class="small grey"><!-- 100 --> ${aTime?iso_utc}

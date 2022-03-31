@@ -1,12 +1,13 @@
 package com.example.SpringLearn.controllers.cave;
 
 import com.example.SpringLearn.models.user.User;
+import com.example.SpringLearn.services.clan.ClanService;
 import com.example.SpringLearn.services.user.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -16,9 +17,12 @@ import java.util.List;
 public class CaveController {
 
     final UserService userService;
+    final ClanService clanService;
 
-    public CaveController(UserService userService) {
+    @Autowired
+    public CaveController(UserService userService, ClanService clanService) {
         this.userService = userService;
+        this.clanService = clanService;
     }
 
 
@@ -44,6 +48,7 @@ public class CaveController {
         if(userService.expBar(userById) == 100) {
             model.addAttribute("newLevel", 1);
         }
+        clanService.updateLevelClan(userById.getClan().getId());
         userService.updateLevelUser(userById);
 
         model.addAttribute("us", userById);

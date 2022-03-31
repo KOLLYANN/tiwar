@@ -112,10 +112,4 @@ public class ArenaController {
     public static int rand() {
         return new Random().nextInt(3);
     }
-
-
-
-
-
-
 }

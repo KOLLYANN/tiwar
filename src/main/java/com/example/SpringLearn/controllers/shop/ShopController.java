@@ -31,13 +31,13 @@ public class ShopController {
 
     @GetMapping
     public String getShop(
-        @AuthenticationPrincipal User user,
-        Model model
+            @AuthenticationPrincipal User user,
+            Model model
     ) {
-            User us = userService.findUserById(user.getId());
+        User us = userService.findUserById(user.getId());
 
-            model.addAttribute("us", us);
-            model.addAttribute("exp", userService.expBar(us));
+        model.addAttribute("us", us);
+        model.addAttribute("exp", userService.expBar(us));
 
         return "shop/shop";
     }
@@ -51,59 +51,70 @@ public class ShopController {
         User us = userService.findUserById(user.getId());
 
         List<Thing> allThings = thingService.findAll();
-        List<Thing> complect1 = new ArrayList<>();
-        List<Thing> complect2 = new ArrayList<>();
+        List<Thing> complect = new ArrayList<>();
         for (Thing th : allThings) {
-            if(th.getSkillGrade() <=10 && th.getUser() == null) {
-                complect1.add(th);
-            } else if(th.getSkillGrade() <= 50 && th.getUser() == null) {
-                complect2.add(th);
+            if (th.getSkillGrade() == 10 && id == 1 && th.getUser() == null) {
+                complect.add(th);
+            } else if (th.getSkillGrade() == 50 && id == 2 && th.getUser() == null) {
+                complect.add(th);
+            } else if (th.getSkillGrade() == 100 && id == 3 && th.getUser() == null) {
+                complect.add(th);
+            } else if (th.getSkillGrade() == 200 && id == 4 && th.getUser() == null) {
+                complect.add(th);
+            } else if (th.getSkillGrade() == 300 && id == 5 && th.getUser() == null) {
+                complect.add(th);
+            } else if (th.getSkillGrade() == 303 && id == 6 && th.getUser() == null) {
+                complect.add(th);
             }
-        }
-
-        model.addAttribute("complect1", complect1);
-        model.addAttribute("complect2", complect2);
+            }
+        model.addAttribute("complect1", complect);
         model.addAttribute("us", us);
         model.addAttribute("exp", userService.expBar(us));
-        if(id == 1) {
-            return "/shop/complect1";
-        } else if(id == 2) {
-            return "/shop/complect2";
-        } else {
-            return "redirect:/";
-        }
+
+        return "/shop/complect1";
     }
 
 
     @PostMapping("/buy/thing")
     public String buyThing(
-        @AuthenticationPrincipal User user,
-        @RequestParam("idThing") Long id,
-        RedirectAttributes redirectAttributes
+            @AuthenticationPrincipal User user,
+            @RequestParam("idThing") Long id,
+            RedirectAttributes redirectAttributes
     ) {
         User userById = userService.findUserById(user.getId());
+        List<Thing> thingsUser = userById.getThings();
+        long count = thingsUser.stream().filter(thing -> thing.getState() == 0).count();
         List<Thing> things = thingService.findAll();
-        for(Thing th : things) {
-            if(th != null && th.getId() == id && userById.getUserGold() >= th.getPrice()) {
+        for (Thing th : things) {
+            if (th != null && th.getId() == id && userById.getUserGold() >= th.getPrice()
+                    && count < 20
+            ) {
                 userService.buyThing(th.getPrice(), userById.getId());
                 Thing thing = new Thing(th.getTitle(), th.getParameters(), th.getPathImage(),
-                        th.getGrade(), th.getPosition(), th.getSkillGrade(), th.getPlace(),th.getState(),th.getPrice());
+                        th.getGrade(), th.getPosition(), th.getSkillGrade(), th.getPlace(), th.getState(),
+                        th.getPrice(), th.getQuality(), th.getBorder(), 0L, th.getMiniGrade());
                 thing.setUser(userById);
                 thingService.saveThing(thing);
-                redirectAttributes.addFlashAttribute("success",true);
+                redirectAttributes.addFlashAttribute("success", true);
             }
         }
 
-        if(id <= 7) {
+        if (id > 21 && id <= 28) {
             return "redirect:/shop/complect/1";
-        } else if(id > 7 && id <= 50) {
+        } else if (id > 7 && id <= 14) {
             return "redirect:/shop/complect/2";
+        } else if (id > 14 && id <= 21) {
+            return "redirect:/shop/complect/3";
+        } else if (id >= 29 && id <= 35) {
+            return "redirect:/shop/complect/4";
+        } else if (id >= 36 && id <= 42) {
+            return "redirect:/shop/complect/5";
+        } else if (id >= 43 && id <= 49) {
+            return "redirect:/shop/complect/6";
         }
 
         return "redirect:/shop/complect/1";
     }
-
-
 
 
 }

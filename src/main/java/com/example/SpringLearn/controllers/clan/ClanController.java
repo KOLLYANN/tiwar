@@ -1,17 +1,17 @@
 package com.example.SpringLearn.controllers.clan;
 
+import com.example.SpringLearn.models.chat.Chat;
 import com.example.SpringLearn.models.clan.Clan;
 import com.example.SpringLearn.models.user.User;
+import com.example.SpringLearn.repositories.chat.ChatRepository;
 import com.example.SpringLearn.services.clan.ClanService;
 import com.example.SpringLearn.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.Banner;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
@@ -23,11 +23,13 @@ public class ClanController {
 
     final UserService userService;
     final ClanService clanService;
+    final ChatRepository chatRepository;
 
     @Autowired
-    public ClanController(UserService userService, ClanService clanService) {
+    public ClanController(UserService userService, ClanService clanService, ChatRepository chatRepository) {
         this.userService = userService;
         this.clanService = clanService;
+        this.chatRepository = chatRepository;
     }
 
 
@@ -168,9 +170,14 @@ public class ClanController {
         Optional<User> userByIdt = userService.findUserByIdt(authUser.getId());
         if(userByIdt.get().getClan() == null && userByIdt.get().getGold() >= 2500) {
             Clan clan = new Clan(title,0L,0L, 0L,0L,0L,0L,0L,
-                    0L,360L,1L ,List.of(authUser), userByIdt.get().getId());
+                    0L,0L, 0L,0L,0L,
+                    0L,360L,1L ,List.of(userByIdt.get()), userByIdt.get().getId());
             Clan clan1 = clanService.saveClan(clan);
             userByIdt.get().setClan(clan1);
+
+            Chat chat = new Chat("ClanChat" + clan.getId());
+            chatRepository.save(chat);
+
             userService.minusGoldForClanCreate(userByIdt.get().getId());
             userService.saveUser(userByIdt.get());
         }
@@ -212,6 +219,10 @@ public class ClanController {
 
             Clan clan = clanService.findClanById(id).get();
             List<User> userList = clan.getUsers();
+
+            Chat chat = chatRepository.findByTitle("ClanChat" + clan.getId());
+
+            chatRepository.delete(chat);
 
             for (User us : userList) {
                 us.setClan(null);

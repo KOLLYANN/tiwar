@@ -72,15 +72,18 @@ public class RequestClanController {
                 if (us.getIdBossAttack() != null) {
                     userRequest.setIdBossAttack(us.getIdBossAttack());
                     userRequest.setBossDamage(0L);
+                    userRequest.setClanRequest(null);
                     userService.saveUser(userRequest);
                 } else {
                     userRequest.setIdBossAttack(null);
                     userRequest.setBossDamage(null);
+                    userRequest.setClanRequest(null);
+                    userService.saveUser(userRequest);
                 }
             }
 
         }
-        return "redirect:/clan/" + clanById.getId() + "/request";
+        return "redirect:/clan/" + id + "/request";
     }
 
 

@@ -102,7 +102,7 @@
         <img src="/img/icon/silver.png" alt="e"> ${us.getSilver()}
     </div>
     <div class="mini-line" style="margin-top: 10px"></div>
-    <div class="center "><br><span class="grey"><a href="">Форум</a> | <a href="">Чат</a> | <a
+    <div class="center "><br><span class="grey"><a href="">Форум</a> | <a href="/chat">Чат</a> | <a
                     href="/rating/">Рейтинг</a></span>
         <div class="mb10"></div>
         <span class="small grey"><!-- 100 --> ${aTime?iso_utc}

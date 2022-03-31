@@ -22,6 +22,7 @@ public class Config implements WebMvcConfigurer {
                 .addResourceLocations("classpath:/static/");
         registry.addResourceHandler("/img/**")
         .addResourceLocations("file:///" + "C:\\Users\\Nikolay\\Desktop\\upload" + "/");
+//        .addResourceLocations("file://" + "/home/upload" + "/");
     }
 
     @Override

@@ -1,10 +1,12 @@
 package com.example.SpringLearn.services.user;
 
+import com.example.SpringLearn.models.thing.Thing;
 import com.example.SpringLearn.models.user.Role;
 import com.example.SpringLearn.models.user.User;
 import com.example.SpringLearn.repositories.user.UserRepo;
 import com.example.SpringLearn.services.mail.MailSender;
 import com.example.SpringLearn.services.person.PersonService;
+import com.example.SpringLearn.services.thing.ThingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,16 +14,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.UUID;
+import java.util.*;
 import java.util.logging.Logger;
 
 @Service
@@ -31,14 +29,16 @@ public class UserService implements UserDetailsService {
     final PasswordEncoder passwordEncoder;
     final MailSender mailSender;
     final PersonService personService;
+    final ThingService thingService;
 
 
     @Autowired
-    public UserService(UserRepo userRepo, @Lazy PasswordEncoder passwordEncoder, MailSender mailSender, PersonService personService) {
+    public UserService(UserRepo userRepo, @Lazy PasswordEncoder passwordEncoder, MailSender mailSender, PersonService personService, ThingService thingService) {
         this.userRepo = userRepo;
         this.passwordEncoder = passwordEncoder;
         this.mailSender = mailSender;
         this.personService = personService;
+        this.thingService = thingService;
     }
 
     public void buyThing(Long priceThing, Long id) {
@@ -149,6 +149,18 @@ public class UserService implements UserDetailsService {
         userRepo.updateExpAndSilverUserAtCave(exp, silver, userId);
     }
 
+    public void addSkull(Long id) {
+        userRepo.addSkull(id);
+    }
+
+    public void updateAttackColiseum(Long idUserAttack, Long id) {
+        userRepo.updateAttackColiseum(idUserAttack, id);
+    }
+
+    public void updateStartAttackColiseum(Long flag, Long id) {
+        userRepo.updateStartAttackColiseum(flag, id);
+    }
+
     public boolean checkUsername(String name) {
         return userRepo.findAll().stream().anyMatch(user -> user.getUsername().equals(name));
     }
@@ -215,6 +227,7 @@ public class UserService implements UserDetailsService {
         user.setSkill(0L);
         user.setSilver(5000L);
         user.setMana(1000L);
+        user.setSkull(0L);
         user.setSkillMana(0L);
         user.setSkillMaxMana(100L);
         user.setSkillHealth(0L);
@@ -232,13 +245,62 @@ public class UserService implements UserDetailsService {
         user.setActivateMailCode(UUID.randomUUID().toString());
         user.setActive(true);
 
+        List<Thing> things = thingService.findAll();
+
         user.setExpForClan(0L);
 
         sendEmail(user);
 
-        user.setRoles(Collections.
-                singleton(Role.USER));
+        user.setRoles(Collections.singleton(Role.USER));
         userRepo.save(user);
+
+        Thing th1 = null;
+        Thing th2 = null;
+        Thing th3 = null;
+        Thing th4 = null;
+        Thing th5 = null;
+        Thing th6 = null;
+        Thing th7 = null;
+
+        for (Thing th : things) {
+            if (th.getId() == 1) {
+                th1 = new Thing(th.getTitle(), th.getParameters(), th.getPathImage(),
+                        th.getGrade(), th.getPosition(), th.getSkillGrade(),
+                        th.getPlace(), 1L, th.getPrice(), th.getQuality(), th.getBorder(), 0L, "11");
+                th1.setUser(user);
+            } else if (th.getId() == 2) {
+                th2 = new Thing(th.getTitle(), th.getParameters(), th.getPathImage(),
+                        th.getGrade(), th.getPosition(), th.getSkillGrade(),
+                        th.getPlace(), 1L, th.getPrice(), th.getQuality(), th.getBorder(), 0L, "11");
+                th2.setUser(user);
+            } else if (th.getId() == 3) {
+                th3 = new Thing(th.getTitle(), th.getParameters(), th.getPathImage(),
+                        th.getGrade(), th.getPosition(), th.getSkillGrade(),
+                        th.getPlace(), 1L, th.getPrice(), th.getQuality(), th.getBorder(), 0L, "11");
+                th3.setUser(user);
+            } else if (th.getId() == 4) {
+                th4 = new Thing(th.getTitle(), th.getParameters(), th.getPathImage(),
+                        th.getGrade(), th.getPosition(), th.getSkillGrade(),
+                        th.getPlace(), 1L, th.getPrice(), th.getQuality(), th.getBorder(), 0L, "11");
+                th4.setUser(user);
+            } else if (th.getId() == 5) {
+                th5 = new Thing(th.getTitle(), th.getParameters(), th.getPathImage(),
+                        th.getGrade(), th.getPosition(), th.getSkillGrade(),
+                        th.getPlace(), 1L, th.getPrice(), th.getQuality(), th.getBorder(), 0L, "11");
+                th5.setUser(user);
+            } else if (th.getId() == 6) {
+                th6 = new Thing(th.getTitle(), th.getParameters(), th.getPathImage(),
+                        th.getGrade(), th.getPosition(), th.getSkillGrade(),
+                        th.getPlace(), 1L, th.getPrice(), th.getQuality(), th.getBorder(), 0L, "11");
+                th6.setUser(user);
+            } else if (th.getId() == 7) {
+                th7 = new Thing(th.getTitle(), th.getParameters(), th.getPathImage(),
+                        th.getGrade(), th.getPosition(), th.getSkillGrade(),
+                        th.getPlace(), 1L, th.getPrice(), th.getQuality(), th.getBorder(), 0L, "11");
+                th7.setUser(user);
+            }
+        }
+        thingService.saveAllThing(List.of(th1, th2, th3, th4, th5, th6, th7));
     }
 
 
@@ -297,11 +359,38 @@ public class UserService implements UserDetailsService {
 
     public void updateLevelUser(User us) {
 
-
         if (us.getUserLevel() < 150 && us.getExp() >= us.getExpy()) {
             userRepo.updateUserLevel(us.getId(), (long) exp(us.getUserLevel() + 1));
         }
     }
+
+    public void updateCampaign(Long flag, User user) {
+        userRepo.updateCampaign(flag, user.getId());
+    }
+
+    public void timerTaskCampaign(User user) {
+
+        User userById = userRepo.findById(user.getId()).get();
+
+        TimerTask timerTask = new TimerTask() {
+            @Override
+            public void run() {
+                if(userRepo.getCampaign(userById.getId()) != null) {
+                    userRepo.addSkull(userById.getId());
+                    System.out.println("ТУТТУТУТУТ");
+                }
+                userRepo.updateCampaign(null, userById.getId());
+                userRepo.setTimeStartCampaign(0, userById.getId());
+                userRepo.setTimeEndCampaign(0, userById.getId());
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(timerTask,60000);
+        userRepo.setTimeStartCampaign(new Date().getTime(), userById.getId());
+        userRepo.setTimeEndCampaign(new Date().getTime() + 60000, userById.getId());
+
+    }
+
 
     public static int exp(long lv) {
         int exp = 0;
@@ -357,7 +446,76 @@ public class UserService implements UserDetailsService {
             case 48 -> exp = 81216;
             case 49 -> exp = 84672;
             case 50 -> exp = 88200;
+            case 51 -> exp = 91800;
+            case 52 -> exp = 95472;
+            case 53 -> exp = 99216;
+            case 54 -> exp = 103032;
+            case 55 -> exp = 106920;
+            case 56 -> exp = 110880;
+            case 57 -> exp = 114912;
+            case 58 -> exp = 119016;
+            case 59 -> exp = 123192;
+            case 60 -> exp = 127440;
+            case 61 -> exp = 131760;
+            case 62 -> exp = 136152;
+            case 63 -> exp = 140616;
+            case 64 -> exp = 145152;
+            case 65 -> exp = 149760;
+            case 66 -> exp = 154440;
+            case 67 -> exp = 159192;
+            case 68 -> exp = 164016;
+            case 69 -> exp = 168912;
+            case 70 -> exp = 1738800;
+            case 71 -> exp = 1789200;
+            case 72 -> exp = 1840320;
+            case 73 -> exp = 1892160;
+            case 74 -> exp = 1944720;
+            case 75 -> exp = 1998000;
+            case 76 -> exp = 2052000;
+            case 77 -> exp = 2106720;
+            case 78 -> exp = 2162160;
+            case 79 -> exp = 2218320;
+            case 80 -> exp = 2275200;
+            case 81 -> exp = 2332800;
+            case 82 -> exp = 2391120;
+            case 83 -> exp = 2450160;
+            case 84 -> exp = 2509920;
+            case 85 -> exp = 2570400;
+            case 86 -> exp = 2631600;
+            case 87 -> exp = 2693520;
+            case 88 -> exp = 2756160;
+            case 89 -> exp = 2819520;
+            case 90 -> exp = 2883600;
+            case 91 -> exp = 2948400;
+            case 92 -> exp = 3013920;
+            case 93 -> exp = 3080160;
+            case 94 -> exp = 3147120;
+            case 95 -> exp = 3214800;
+            case 96 -> exp = 3283200;
+            case 97 -> exp = 3352320;
+            case 98 -> exp = 3422160;
+            case 99 -> exp = 6848210;
+            case 100 -> exp = 12147280;
         }
         return exp;
     }
+
+    public User getUserRandom(User userById, UserService userService) {
+        List<User> rndUsers = userService.findAll().stream()
+                .filter(user1 -> user1.getStartAttackColiseum() != null
+                        && user1.getIdAttackUserColiseum() == null
+                        && !Objects.equals(user1.getId(), userById.getId()))
+                .toList();
+
+        User usrAttack = null;
+        for (int i = 0; i < rndUsers.size(); i++) {
+            if (!userById.getId().equals(rndUsers.get(i).getId())) {
+                int rnd = new Random().nextInt(rndUsers.size());
+                usrAttack = rndUsers.get(rnd);
+            }
+        }
+        return usrAttack;
+    }
+
+
 }

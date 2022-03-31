@@ -1,5 +1,6 @@
 package com.example.SpringLearn.models.user;
 
+import com.example.SpringLearn.models.chat.Message;
 import com.example.SpringLearn.models.clan.Clan;
 import com.example.SpringLearn.models.thing.Thing;
 import lombok.*;
@@ -46,10 +47,19 @@ public class User implements UserDetails {
     Long skillPower;
     Long skillMaxPower;
 
+    Long campaign;
+    Long timeCampaign;
+    Long timeEndCampaign;
 
     Long idBossAttack;
     Long bossDamage;
+    Long skull;
 
+    Long startAttackColiseum;
+    Long idAttackUserColiseum;
+
+    @OneToMany(mappedBy = "user", cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    List<DamageColiseum> damageColiseum;
 
     Long health;
     Long mana;
@@ -80,6 +90,9 @@ public class User implements UserDetails {
     @OneToMany(mappedBy = "user", cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     List<Thing> things;
 
+
+    @OneToMany(mappedBy = "user", cascade={CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    List<Message> messages;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "usr_role", joinColumns = @JoinColumn(name = "id_user"))

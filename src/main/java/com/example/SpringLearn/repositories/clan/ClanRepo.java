@@ -52,7 +52,30 @@ public interface ClanRepo extends JpaRepository<Clan, Long> {
     @Query("update Clan c set c.countB5 = c.countB5 + 1, c.exp = c.exp + 1541 where c.id = :id")
     void addCountBossVictoryB5(@Param("id") Long id);
 
+    @Transactional
+    @Modifying
+    @Query("update Clan c set c.countB6 = c.countB6 + 1, c.exp = c.exp + 3210 where c.id = :id")
+    void addCountBossVictoryB6(@Param("id") Long id);
 
+    @Transactional
+    @Modifying
+    @Query("update Clan c set c.countB7 = c.countB7 + 1, c.exp = c.exp + 3501 where c.id = :id")
+    void addCountBossVictoryB7(@Param("id") Long id);
+
+    @Transactional
+    @Modifying
+    @Query("update Clan c set c.countB8 = c.countB8 + 1, c.exp = c.exp + 4501 where c.id = :id")
+    void addCountBossVictoryB8(@Param("id") Long id);
+
+    @Transactional
+    @Modifying
+    @Query("update Clan c set c.countB9 = c.countB9 + 1, c.exp = c.exp + 6501 where c.id = :id")
+    void addCountBossVictoryB9(@Param("id") Long id);
+
+    @Transactional
+    @Modifying
+    @Query("update Clan c set c.countB10 = c.countB10 + 1, c.exp = c.exp + 12014 where c.id = :id")
+    void addCountBossVictoryB10(@Param("id") Long id);
 
 
 }

@@ -21,7 +21,7 @@
            <div class="block_zero">
         <div class="item50 ibl fl"
              style="background-image:url(/img/thingsuser/${complect.getPathImage()}.png);margin-right:5px;">
-            <div class="it_brd q2p sh8">
+            <div class="it_brd ${complect.getBorder()} sh8">
                 <div class="it_stat1"></div>
                 <div class="clb"></div>
                 <div class="it_stat2 cntr">
@@ -30,8 +30,8 @@
             </div>
         </div>
         ${complect.getTitle()}
-        <span class="small"><br><img src="/img/icon/grade/2p.png" alt=""> <span
-                    class="quality-2p">${complect.getGrade()}</span><br>
+        <span class="small"><br><img src="/img/icon/grade/${complect.getMiniGrade()}.png" alt=""> <span
+                    class="${complect.getQuality()}">${complect.getGrade()}</span><br>
             <span class="green">+${complect.getParameters()} к параметрам</span></span>
         <div style="clear:both;"></div>
         <div class="center">
@@ -63,7 +63,7 @@
         <img src="/img/icon/silver.png" alt="e"> ${us.getSilver()}
     </div>
     <div class="mini-line" style="margin-top: 10px"></div>
-    <div class="center "><br><span class="grey"><a href="">Форум</a> | <a href="">Чат</a> | <a
+    <div class="center "><br><span class="grey"><a href="">Форум</a> | <a href="/chat">Чат</a> | <a
                     href="/rating/">Рейтинг</a></span>
         <div class="mb10"></div>
         <span class="small grey"><!-- 100 --> ${aTime?iso_utc}

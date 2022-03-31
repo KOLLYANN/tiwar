@@ -44,6 +44,22 @@ public interface UserRepo extends JpaRepository<User, Long> {
 
     @Modifying
     @Transactional
+    @Query("update User u set u.skull = u.skull + 1 where u.id = :id")
+    void addSkull(@Param("id") long id);
+
+    @Modifying
+    @Transactional
+    @Query("update User u set u.idAttackUserColiseum = :idUserAttack where u.id = :id")
+    void updateAttackColiseum(@Param("idUserAttack") Long idUserAttack,@Param("id") long id);
+
+    @Modifying
+    @Transactional
+    @Query("update User u set u.startAttackColiseum = :flag where u.id = :id")
+    void updateStartAttackColiseum(@Param("flag") Long flag,@Param("id") long id);
+
+
+    @Modifying
+    @Transactional
     @Query("update User u set u.exp = u.exp + :exp,u.expForClan = u.expForClan + :expForClan, u.silver = u.silver + :silver where u.id = :id")
     void updateExpUser(@Param("exp") long exp,@Param("expForClan") Long expForClan,@Param("silver") long silver ,@Param("id") long id);
 
@@ -131,11 +147,33 @@ public interface UserRepo extends JpaRepository<User, Long> {
     @Query("update User u set u.pathToAvatar = 'ava.png' where u.id = :id")
     void deleteAvatar(@Param("id") Long id);
 
+    @Modifying
+    @Transactional
+    @Query("update User u set u.campaign = :flag where u.id = :id")
+    void updateCampaign(@Param("flag") Long flag, @Param("id") Long id);
+
+    @Query(value = "select campaign from usr where id = ?1", nativeQuery = true)
+    Long getCampaign(Long id);
 
     @Transactional
     @Modifying
-    @Query("update User c set c.userLevel = c.userLevel + 1, c.userGold = c.userGold + (c.userLevel * 3), c.exp = 0, c.expy = :expy where c.id = :id")
-    public void updateUserLevel(@Param("id") Long id, @Param("expy") Long expy);
+    @Query("update User u set u.timeCampaign = :time where u.id = :id")
+    void setTimeStartCampaign(@Param("time") long time,@Param("id") Long id);
+
+    @Transactional
+    @Modifying
+    @Query("update User u set u.timeEndCampaign = :time where u.id = :id")
+    void setTimeEndCampaign(@Param("time") long time,@Param("id") Long id);
+
+
+
+
+
+    @Transactional
+    @Modifying
+    @Query("update User c set c.userLevel = c.userLevel + 1, c.userGold = c.userGold + (c.userLevel * 3), c.exp = 0," +
+            " c.expy = :expy where c.id = :id")
+    void updateUserLevel(@Param("id") Long id, @Param("expy") Long expy);
 
     @Transactional
     @Modifying

@@ -39,31 +39,56 @@ public class ClanService {
     public void addCountB1forClan(Long id) {
         clanRepo.addCountBossVictoryB1(id);
     }
+
     public void addCountB2forClan(Long id) {
         clanRepo.addCountBossVictoryB2(id);
     }
+
     public void addCountB3forClan(Long id) {
         clanRepo.addCountBossVictoryB3(id);
     }
+
     public void addCountB4forClan(Long id) {
         clanRepo.addCountBossVictoryB4(id);
     }
+
     public void addCountB5forClan(Long id) {
         clanRepo.addCountBossVictoryB5(id);
+    }
+
+    public void addCountB6forClan(Long id) {
+        clanRepo.addCountBossVictoryB6(id);
+    }
+
+    public void addCountB7forClan(Long id) {
+        clanRepo.addCountBossVictoryB7(id);
+    }
+
+    public void addCountB8forClan(Long id) {
+        clanRepo.addCountBossVictoryB8(id);
+    }
+
+    public void addCountB9forClan(Long id) {
+        clanRepo.addCountBossVictoryB9(id);
+    }
+
+    public void addCountB10forClan(Long id) {
+        clanRepo.addCountBossVictoryB10(id);
     }
 
     public void addGoldInClan(Long addGold, Long id) {
         clanRepo.addGoldInClan(addGold, id);
     }
+
     public void addSilverInClan(Long addSilver, Long id) {
         clanRepo.addSilverInClan(addSilver, id);
     }
 
     public double expBarClan(Clan clan) {
 
-        double exp_progress = 100/(exp(clan.getLevel())/ (double) clan.getExp());
+        double exp_progress = 100 / (exp(clan.getLevel()) / (double) clan.getExp());
 
-        if(exp_progress > 100) {
+        if (exp_progress > 100) {
             exp_progress = 100;
         }
         return Math.floor(exp_progress);
@@ -71,10 +96,10 @@ public class ClanService {
 
     public void updateLevelClan(Long id) {
         Optional<Clan> clan = clanRepo.findById(id);
-            Clan c = clan.get();
-            if(c.getLevel() < 150 && c.getExp() >= c.getExpy()) {
-                clanRepo.updateClanLevel(c.getId(), (long) exp(c.getLevel() + 1));
-            }
+        Clan c = clan.get();
+        if (c.getLevel() < 150 && c.getExp() >= c.getExpy()) {
+            clanRepo.updateClanLevel(c.getId(), (long) exp(c.getLevel() + 1));
+        }
     }
 
     public static int exp(long lv) {

@@ -16,7 +16,7 @@
                 <div class="separ"></div>
                 Ты получил <span class="dgreen">${us.getUserLevel() + 1}</span> уровень!<br><span
                         class="blue">Награда:</span> <img
-                        src="/img/icon/gold.png" alt=""> ${us.getUserLevel() + 5} золота
+                        src="/img/icon/gold.png" alt=""> ${us.getUserLevel() * 3} золота
                 <div class="separ"></div>
                 <div class="mb10"></div>
             </div>
@@ -26,8 +26,10 @@
     <div class="mini-line"/>
     <#if notManaOrHealth??>
         <#if notManaOrHealth == 0>
+            <div class="block_zero center">
             <span style="padding: 5px" class="dred">Для нападения надо минимум <img src="/img/icon/health.png" alt=""> 75 жизни и
         <img src="/img/icon/mana.png" alt=""> 75 энергии</span>
+            </div>
         </#if>
     </#if>
     <#if random2?? && notManaOrHealth != 0>
@@ -79,8 +81,7 @@
         </form>
     </div>
     <div class="mini-line" style="margin-top: 10px"></div>
-    <div class="block_zero">Моя мощь: <img src="/img/icon/2hit.png"
-                                           alt=""> ${us.getPower() + us.getMaxHealth() + us.getMaxMana()}<br></div>
+    <div class="block_zero">Моя мощь: <img src="/img/icon/2hit.png" alt=""> ${us.getPower() + us.getMaxHealth() + us.getMaxMana()}<br></div>
     <div class="mini-line"></div>
     <ul class="hint">
         <li>Чем сильнее противник, тем больше опыта и серебра получишь за победу!</li>
@@ -101,7 +102,7 @@
         <img src="/img/icon/silver.png" alt="e"> ${us.getSilver()}
     </div>
     <div class="mini-line" style="margin-top: 10px"></div>
-    <div class="center "><br><span class="grey"><a href="">Форум</a> | <a href="">Чат</a> | <a
+    <div class="center "><br><span class="grey"><a href="">Форум</a> | <a href="/chat">Чат</a> | <a
                     href="/rating/">Рейтинг</a></span>
         <div class="mb10"></div>
         <span class="small grey"><!-- 100 --> ${aTime?iso_utc}

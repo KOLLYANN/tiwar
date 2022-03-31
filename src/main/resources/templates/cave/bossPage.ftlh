@@ -1,7 +1,8 @@
 <#import "../parts/comp.ftlh" as c>
 <#include "../parts/security.ftlh">
 <@c.page>
-    <div class="head " style="position:relative;" onclick="location.href='/';"><span class="ttl fl">Пещера</span>
+    <script defer src="/static/timer.js" type="text/javascript"></script>
+    <div class="head " style="position:relative;" onclick="location.href='/';"><span class="ttl fl">Олимп</span>
         <span class="bl rght nwr"><img src="/img/icon/health.png" alt="hp"> <span class="white">${us.getHealth()}</span>
             | <img src="/img/icon/mana.png" alt="mp"> ${us.getMana()}</span>
         <div class="clr"></div>
@@ -25,9 +26,14 @@
 
     <div class="menuList">
         <#if boss??>
-            <li><a href="/boss/${boss.getId()!"1"}"><img src="/img/cave/${boss.getTitleAva()}.jpg" alt="">
-                    ${boss.getName()}
-                    <table>
+            <li><a href="/cave"><img src="/img/cave/${boss.getTitleAva()}.png" alt="">
+                    ${boss.getName()}<br>
+                    <#if boss.getAttackExists() == 1>
+                    <div class="dot-line" style="padding-top: 5px"></div>
+                    <span class="bold white" name="timer">00:${time}</span>
+                    <div class="dot-line"></div>
+                    </#if>
+                    <table style="margin-top: -15px">
                         <tr>
                             <td>
                             <td>
@@ -65,6 +71,30 @@
                 </li>
             </div>
             <div class="mini-line"></div>
+            <div class="center">
+                <div class="block_light">
+                    <div class="separ"></div>
+                    <span class="blue">За победу над этим боссом вы получите:</span><br>
+                    <#if boss.getPower() == 100>
+                        <img src="/img/icon/silver.png" alt=""> 50 серебра<br>
+                        <img src="/img/icon/exp.png" alt="exp"> 100 опыта<br>
+                    <#elseif boss.getPower() == 500>
+                        <img src="/img/icon/silver.png" alt=""> 250 серебра<br>
+                        <img src="/img/icon/exp.png" alt="exp"> 500 опыта<br>
+                    <#elseif boss.getPower() == 1000>
+                        <img src="/img/icon/silver.png" alt=""> 5000 серебра<br>
+                        <img src="/img/icon/exp.png" alt="exp"> 1000 опыта<br>
+                    <#elseif boss.getPower() == 3000>
+                        <img src="/img/icon/silver.png" alt=""> 15000 серебра<br>
+                        <img src="/img/icon/exp.png" alt="exp"> 3000 опыта<br>
+                    <#elseif boss.getPower() == 5000>
+                        <img src="/img/icon/silver.png" alt=""> 25000 серебра<br>
+                        <img src="/img/icon/exp.png" alt="exp"> 5000 опыта<br>
+                    </#if>
+                    <div class="separ"></div>
+                </div>
+            </div>
+            <div class="mini-line"></div>
             <ul class="hint">
                 <li>Чем больше у вас клан, тем более сильных противников сможете убить</li>
                 <li>Чем выше у тебя параметры, тем больше урона нанесешь боссу</li>
@@ -73,7 +103,7 @@
         </#if>
     <#else>
         <#if us.getIdBossAttack()??>
-            <form method="post" action="/boss/attack" style="padding-top: 10px">
+            <form method="post" action="/boss/attack" style="padding-top: 10px; padding-bottom: 10px">
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                 <input type="hidden" name="bossId" value="${boss.getId()}">
                 <button style="border: none; background: none" type="submit"><img src="/img/atk.png" alt="attack">
@@ -90,29 +120,6 @@
             <#else>
                 Никто не нанес урон
             </#if>
-            <div class="center">
-            <div class="block_light">
-                <div class="separ"></div>
-                <span class="blue">За победу над этим боссом вы получите:</span><br>
-                <#if boss.getPower() == 100>
-                <img src="/img/icon/silver.png" alt=""> 50 серебра<br>
-                <img src="/img/icon/exp.png" alt="exp"> 100 опыта<br>
-                    <#elseif boss.getPower() == 500>
-                        <img src="/img/icon/silver.png" alt=""> 250 серебра<br>
-                        <img src="/img/icon/exp.png" alt="exp"> 500 опыта<br>
-                <#elseif boss.getPower() == 1000>
-                    <img src="/img/icon/silver.png" alt=""> 5000 серебра<br>
-                    <img src="/img/icon/exp.png" alt="exp"> 1000 опыта<br>
-                <#elseif boss.getPower() == 3000>
-                    <img src="/img/icon/silver.png" alt=""> 15000 серебра<br>
-                    <img src="/img/icon/exp.png" alt="exp"> 3000 опыта<br>
-                <#elseif boss.getPower() == 5000>
-                    <img src="/img/icon/silver.png" alt=""> 25000 серебра<br>
-                    <img src="/img/icon/exp.png" alt="exp"> 5000 опыта<br>
-                </#if>
-                <div class="separ"></div>
-            </div>
-            </div>
         <#else>
             <form method="post" action="/boss/attack" style="padding-top: 10px">
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
@@ -124,14 +131,15 @@
     <div class="mini-line"></div>
     <div class="menuList">
         <#if us.getClan()??>
-            <li><a href="/cave"><img src="/img/icon/cave.png" alt="">Пещера<span class="green"> </span>
+            <li><a href="/cave"><img src="/img/icon/cave.png" alt="">Олимп<span class="green"> </span>
                     <span class="grey small"></span>
-                </a></li>
+                </a>
+            </li>
         </#if>
     </div>
-    <div class="line"></div>
+    <div class="line"/>
     <div class="player menuList">
-        <li><a href="/profile/${us.getId()}"><img src="/img/icon/user.png" alt="">Мой герой</a></li>
+        <li><a href="/profile/${user.getId()}"><img src="/img/icon/user.png" alt="">Мой герой</a></li>
         <li><a href="/clan/"><img src="/img/icon/user.png" alt="">Мой клан<span class="green"> (+)</span></a>
         </li>
         <li class="noBorder"><a href="/"><img src="/img/icon/arrow.png" alt="">На главную</a></li>
@@ -145,7 +153,7 @@
         <img src="/img/icon/silver.png" alt="e"> ${us.getSilver()}
     </div>
     <div class="mini-line" style="margin-top: 10px"></div>
-    <div class="center "><br><span class="grey"><a href="">Форум</a> | <a href="">Чат</a> | <a
+    <div class="center "><br><span class="grey"><a href="">Форум</a> | <a href="/chat">Чат</a> | <a
                     href="/rating/">Рейтинг</a></span>
         <div class="mb10"></div>
         <span class="small grey"><!-- 100 --> ${aTime?iso_utc}

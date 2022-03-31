@@ -10,8 +10,13 @@
     <div class="exp_bar">
         <div class="progress" style="width:${exp}%"></div>
     </div>
-    <div class="block_zero center"><img src="/img/icon/0.png" alt=""> <b>${us.getUsername()}</b> <img
-                src="/img/icon/level.png" alt=""> ${us.getUserLevel()} ур<br>
+    <div class="block_zero center"><img src="/img/icon/0.png" alt="">
+        <#if us.getId() == 1>
+        <b style="color: #43fc03">${us.getUsername()}</b>
+            <#else>
+            <b>${us.getUsername()}</b>
+        </#if>
+        <img src="/img/icon/level.png" alt=""> ${us.getUserLevel()} ур<br>
         <img src="/img/icon/clanAva.png" style="width: 10px; height: 10px" alt="">
         <#if us.getClan()??>
             <a href="/clan/${us.getClan().getId()}">Клан: ${us.getClan().getTitle()}</a><br>
@@ -24,131 +29,139 @@
         <table class="player_table">
             <tbody>
             <tr>
-                <td><a href="/profile/${us.getId()}/equip">
-                        <div class="item50 ibl"
-                                <#if helmet??>
-                             style="background-image:url(/img/thingsuser/${helmet.getPathImage()}.png);margin-right:5px;">
-                            <#else>
-                                style="background-image:url(/img/things/bg.png);margin-right:5px;">
-                            </#if>
-                            <div class="it_brd q2 sh8">
-                                <div class="it_stat1"></div>
-                                <div class="clb"></div>
-                                <div class="it_stat2 cntr">
-                                    <div class="it_stars"></div>
+                <#list thingsUserEquip as thing>
+                    <#if thing.getPosition() == 1>
+                        <td><a href="/profile/${us.getId()}/equip">
+                                <div class="item50 ibl"
+                                     style="background-image:url(/img/thingsuser/${thing.getPathImage()}.png);margin-right:5px;">
+                                    <div class="it_brd ${thing.getBorder()} sh8">
+                                        <div class="it_stat1"></div>
+                                        <div class="clb"></div>
+                                        <div class="it_stat2 cntr">
+                                            <div class="it_stars"></div>
+                                            ${thing.getSmith()}/90
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </a></td>
+                            </a></td>
+                    </#if>
+                </#list>
                 <td colspan="2" rowspan="3"><a
                             href="/profile/${us.getId()}/equip">
                         <div class="p_dummy"
-                             style="background-image:url(/img/things/top.png);">
+                             style="background-image:url(/img/things/top2.png);">
                             <div class="brd"></div>
                         </div>
                     </a></td>
-                <td><a href="/profile/${us.getId()}/equip">
-                        <div class="item50 ibl"
-                                <#if shoulder??>
-                             style="background-image:url(/img/thingsuser/${shoulder.getPathImage()}.png);margin-right:5px;">
-                            <#else>
-                                style="background-image:url(/img/things/bg.png);margin-right:5px;">
-                            </#if>
-                            <div class="it_brd q2 sh8">
-                                <div class="it_stat1"></div>
-                                <div class="clb"></div>
-                                <div class="it_stat2 cntr">
-                                    <div class="it_stars"></div>
+                <#list thingsUserEquip as thing>
+                    <#if thing.getPosition() == 2>
+                        <td><a href="/profile/${us.getId()}/equip">
+                                <div class="item50 ibl"
+                                     style="background-image:url(/img/thingsuser/${thing.getPathImage()}.png);margin-right:5px;">
+                                    <div class="it_brd ${thing.getBorder()} sh8">
+                                        <div class="it_stat1"></div>
+                                        <div class="clb"></div>
+                                        <div class="it_stat2 cntr">
+                                            <div class="it_stars"></div>
+                                            ${thing.getSmith()}/90
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </a></td>
+                            </a></td>
+                    </#if>
+                </#list>
             </tr>
             <tr>
-                <td><a href="/profile/${us.getId()}/equip">
-                        <div class="item50 ibl"
-                                <#if sword??>
-                             style="background-image:url(/img/thingsuser/${sword.getPathImage()}.png);margin-right:5px;">
-                            <#else>
-                                style="background-image:url(/img/things/bg.png);margin-right:5px;">
-                            </#if>
-                            <div class="it_brd q2 sh8">
-                                <div class="it_stat1"></div>
-                                <div class="clb"></div>
-                                <div class="it_stat2 cntr">
-                                    <div class="it_stars"></div>
+                <#list thingsUserEquip as thing>
+                    <#if thing.getPosition() == 7>
+                        <td><a href="/profile/${us.getId()}/equip">
+                                <div class="item50 ibl"
+                                     style="background-image:url(/img/thingsuser/${thing.getPathImage()}.png);margin-right:5px;">
+                                    <div class="it_brd ${thing.getBorder()} sh8">
+                                        <div class="it_stat1"></div>
+                                        <div class="clb"></div>
+                                        <div class="it_stat2 cntr">
+                                            <div class="it_stars"></div>
+                                            ${thing.getSmith()}/90
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </a></td>
-                <td><a href="/profile/${us.getId()}/equip">
-                        <div class="item50 ibl"
-                                <#if shield??>
-                             style="background-image:url(/img/thingsuser/${shield.getPathImage()}.png);margin-right:5px;">
-                            <#else>
-                                style="background-image:url(/img/things/bg.png);margin-right:5px;">
-                            </#if>
-                            <div class="it_brd q2 sh8">
-                                <div class="it_stat1"></div>
-                                <div class="clb"></div>
-                                <div class="it_stat2 cntr">
-                                    <div class="it_stars"></div>
+                            </a></td>
+                    </#if>
+                </#list>
+                <#list thingsUserEquip as thing>
+                    <#if thing.getPosition() == 3>
+                        <td><a href="/profile/${us.getId()}/equip">
+                                <div class="item50 ibl"
+                                     style="background-image:url(/img/thingsuser/${thing.getPathImage()}.png);margin-right:5px;">
+                                    <div class="it_brd ${thing.getBorder()} sh8">
+                                        <div class="it_stat1"></div>
+                                        <div class="clb"></div>
+                                        <div class="it_stat2 cntr">
+                                            <div class="it_stars"></div>
+                                            ${thing.getSmith()}/90
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </a></td>
+                            </a></td>
+                    </#if>
+                </#list>
             </tr>
             <tr>
-                <td><a href="/profile/${us.getId()}/equip">
-                        <div class="item50 ibl"
-                                <#if armor??>
-                             style="background-image:url(/img/thingsuser/${armor.getPathImage()}.png);margin-right:5px;">
-                            <#else>
-                                style="background-image:url(/img/things/bg.png);margin-right:5px;">
-                            </#if>
-                            <div class="it_brd q2 sh8">
-                                <div class="it_stat1"></div>
-                                <div class="clb"></div>
-                                <div class="it_stat2 cntr">
-                                    <div class="it_stars"></div>
+                <#list thingsUserEquip as thing>
+                    <#if thing.getPosition() == 6>
+                        <td><a href="/profile/${us.getId()}/equip">
+                                <div class="item50 ibl"
+
+                                     style="background-image:url(/img/thingsuser/${thing.getPathImage()}.png);margin-right:5px;">
+                                    <div class="it_brd ${thing.getBorder()} sh8">
+                                        <div class="it_stat1"></div>
+                                        <div class="clb"></div>
+                                        <div class="it_stat2 cntr">
+                                            <div class="it_stars"></div>
+                                            ${thing.getSmith()}/90
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </a></td>
-                <td><a href="/profile/${us.getId()}/equip">
-                        <div class="item50 ibl"
-                                <#if bracers??>
-                             style="background-image:url(/img/thingsuser/${bracers.getPathImage()}.png);margin-right:5px;">
-                            <#else>
-                                style="background-image:url(/img/things/bg.png);margin-right:5px;">
-                            </#if>
-                            <div class="it_brd q2 sh8">
-                                <div class="it_stat1"></div>
-                                <div class="clb"></div>
-                                <div class="it_stat2 cntr">
-                                    <div class="it_stars"></div>
+                            </a></td>
+                    </#if>
+                </#list>
+                <#list thingsUserEquip as thing>
+                    <#if thing.getPosition() == 4>
+                        <td><a href="/profile/${us.getId()}/equip">
+                                <div class="item50 ibl"
+                                     style="background-image:url(/img/thingsuser/${thing.getPathImage()}.png);margin-right:5px;">
+                                    <div class="it_brd ${thing.getBorder()} sh8">
+                                        <div class="it_stat1"></div>
+                                        <div class="clb"></div>
+                                        <div class="it_stat2 cntr">
+                                            <div class="it_stars"></div>
+                                            ${thing.getSmith()}/90
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </a></td>
+                            </a></td>
+                    </#if>
+                </#list>
             </tr>
             <tr>
-                <td><a href="/profile/${us.getId()}/equip">
-                        <div class="item50 ibl"
-                                <#if greaves??>
-                             style="background-image:url(/img/thingsuser/${greaves.getPathImage()}.png);margin-right:5px;">
-                            <#else>
-                                style="background-image:url(/img/things/bg.png);margin-right:5px;">
-                            </#if>
-                            <div class="it_brd q2 sh8">
-                                <div class="it_stat1"></div>
-                                <div class="clb"></div>
-                                <div class="it_stat2 cntr">
-                                    <div class="it_stars"></div>
+                <#list thingsUserEquip as thing>
+                    <#if thing.getPosition() == 5>
+                        <td><a href="/profile/${us.getId()}/equip">
+                                <div class="item50 ibl"
+                                     style="background-image:url(/img/thingsuser/${thing.getPathImage()}.png);margin-right:5px;">
+                                    <div class="it_brd ${thing.getBorder()} sh8">
+                                        <div class="it_stat1"></div>
+                                        <div class="clb"></div>
+                                        <div class="it_stat2 cntr">
+                                            <div class="it_stars"></div>
+                                            ${thing.getSmith()}/90
+                                        </div>
+                                    </div>
                                 </div>
-                            </div>
-                        </div>
-                    </a></td>
+                            </a></td>
+                    </#if>
+                    </#list>
                 <td><a href="/profile/${us.getId()}/equip">
                         <div class="item50 ibl"
                                 <#if ring1??>
@@ -169,22 +182,23 @@
                             <div class="it_brd q1 sh8"></div>
                         </div>
                     </a></td>
+                  <#list thingsUserEquip as thing>
+                    <#if thing.getPosition() == 5>
                 <td><a href="/profile/${us.getId()}/equip">
                         <div class="item50 ibl"
-                                <#if greaves??>
-                             style="background-image:url(/img/thingsuser/${greaves.getPathImage()}.png);margin-right:5px;">
-                            <#else>
-                                style="background-image:url(/img/things/bg.png);margin-right:5px;">
-                            </#if>
-                            <div class="it_brd q2 sh8">
+                             style="background-image:url(/img/thingsuser/${thing.getPathImage()}.png);margin-right:5px;">
+                            <div class="it_brd ${thing.getBorder()} sh8">
                                 <div class="it_stat1"></div>
                                 <div class="clb"></div>
                                 <div class="it_stat2 cntr">
                                     <div class="it_stars"></div>
+                                    ${thing.getSmith()}/90
                                 </div>
                             </div>
                         </div>
                     </a></td>
+                    </#if>
+                    </#list>
             </tr>
             </tbody>
         </table>
@@ -214,9 +228,22 @@
     <#if user??>
         <div class="menuList">
             <li><a href="/profile/${us.getId()}/equip">
-                    <img src="/img/icon/equip.png" alt="">Снаряжение <span class="white">(${amountThing}/7)</span></a>
+                    <img src="/img/icon/equip.png" alt="">Снаряжение <span class="white">(${amountThing!"0"}/7)
+                <br><img src="/img/icon/smith.png" alt="">Бонус: <span class="dgreen">${countSmith}</span> из <span
+                                class="dgreen">900</span>
+                    </span>
+                </a>
             </li>
         </div>
+        <#if us.getId() == id>
+        <div class="mini-line"></div>
+        <div class="menuList">
+            <li><a href="/profile/smith">
+                    <img src="/img/icon/smith.png" alt="">Заточка вещей
+                </a>
+            </li>
+        </div>
+        </#if>
         <div class="mini-line"></div>
         <#if id == id_user>
             <div class="menuList">
@@ -230,7 +257,7 @@
                 </li>
                 <li><a href=""><img src="/img/icon/train.png" alt="">Усиления</a></li>
                 <li><a href="/profile/${id}/bag/"><img src="/img/icon/bag.png" alt="">Сумка <span
-                                class="white"></span></a></li>
+                                class="white">${count}/20</span></a></li>
             </div>
             <div class="mini-line"></div>
             <div class="block_zero">
@@ -304,7 +331,7 @@
             <img src="/img/icon/silver.png" alt="e"> ${auth.getSilver()}
         </div>
         <div class="mini-line" style="margin-top: 10px"></div>
-        <div class="center "><br><span class="grey"><a href="">Форум</a> | <a href="">Чат</a> | <a
+        <div class="center "><br><span class="grey"><a href="">Форум</a> | <a href="/chat">Чат</a> | <a
                         href="/rating/">Рейтинг</a></span>
             <div class="mb10"></div>
             <span class="small grey"><!-- 100 --> ${aTime?iso_utc}
